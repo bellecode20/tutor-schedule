@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/tutor-schedule/static/css/main.4b122693.chunk.css",
+    "main.js": "/tutor-schedule/static/js/main.0fac9cc2.chunk.js",
+    "main.js.map": "/tutor-schedule/static/js/main.0fac9cc2.chunk.js.map",
+    "runtime-main.js": "/tutor-schedule/static/js/runtime-main.6d407e51.js",
+    "runtime-main.js.map": "/tutor-schedule/static/js/runtime-main.6d407e51.js.map",
+    "static/js/2.38240a87.chunk.js": "/tutor-schedule/static/js/2.38240a87.chunk.js",
+    "static/js/2.38240a87.chunk.js.map": "/tutor-schedule/static/js/2.38240a87.chunk.js.map",
+    "static/js/3.bb93d3f8.chunk.js": "/tutor-schedule/static/js/3.bb93d3f8.chunk.js",
+    "static/js/3.bb93d3f8.chunk.js.map": "/tutor-schedule/static/js/3.bb93d3f8.chunk.js.map",
+    "index.html": "/tutor-schedule/index.html",
+    "service-worker.js": "/tutor-schedule/service-worker.js",
+    "service-worker.js.map": "/tutor-schedule/service-worker.js.map",
+    "static/css/main.4b122693.chunk.css.map": "/tutor-schedule/static/css/main.4b122693.chunk.css.map",
+    "static/js/2.38240a87.chunk.js.LICENSE.txt": "/tutor-schedule/static/js/2.38240a87.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6d407e51.js",
+    "static/js/2.38240a87.chunk.js",
+    "static/css/main.4b122693.chunk.css",
+    "static/js/main.0fac9cc2.chunk.js"
+  ]
+}
