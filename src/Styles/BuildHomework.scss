@@ -1,0 +1,51 @@
+@use "basic" as b;
+.build-homework {
+  position: relative;
+  .homeworkForm {
+    padding: b.$content-padding;
+    .homeworkForm__student,
+    .homeworkForm__date,
+    .homeworkForm__homework {
+      @extend .subject--container-size;
+      font-size: b.$font-size--small;
+    }
+    > div {
+      @extend .flex-row;
+      align-items: center;
+      font-size: 2rem;
+      input {
+        @extend .subject--container__input;
+        font-size: b.$font-size--small;
+      }
+      .homeworkForm__student__title,
+      .homeworkForm__date__title,
+      .homeworkForm__homework__title {
+        @extend .font--small-title;
+        @extend .flex-row;
+        @extend .flex-center;
+        min-width: 20vw;
+      }
+      .homeworkForm__student__names {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5px 3px;
+        @extend .flex-row;
+        @extend .flex-center;
+        .homework-form__student-name {
+          padding: 0.5rem 1rem;
+          font-size: 2rem;
+          border-radius: 3px;
+          font-size: b.$font-size--small;
+        }
+        .student-name--selected {
+          box-shadow: 0 0 0 3px b.$main-font-color inset;
+          @extend .font--small-title;
+        }
+      }
+    }
+  }
+  .homeworkForm__saveBtn {
+    @extend .saveBtn;
+    @extend .font--small-title;
+  }
+}

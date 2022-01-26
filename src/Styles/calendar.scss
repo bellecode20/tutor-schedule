@@ -1,0 +1,152 @@
+@use "basic" as b;
+.캘린더 {
+  flex-grow: 6;
+  flex-basis: 0;
+}
+.calendar {
+  height: 100vh;
+  position: relative;
+  @extend .flex-column;
+  .calendar__show-menu-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+  .calendar__menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 6rem 3rem;
+    background-color: b.$main-color;
+    height: 100vh;
+    width: 70%;
+    @extend .font--small-title;
+    .menu__line {
+      width: 90%;
+      height: 2px;
+      background-color: b.$sub-font-color--gray;
+    }
+    .calendar__menu__close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem;
+    }
+    .calendar__menu__close-btn:hover {
+      background-color: b.$main-color--deep;
+      border-radius: 50%;
+      padding: 0.5rem;
+    }
+    .calendar__menu__list {
+      padding: 5rem 0 0.5rem 0;
+    }
+    // .calendar__menu__icon {
+    //   position: absolute;
+    //   bottom: 2rem;
+    //   right: 2rem;
+    //   font-size: 10rem;
+    //   color: rgb(185, 185, 185);
+    // }
+  }
+  .calendarTop {
+    @extend .font--title;
+    display: flex;
+    justify-content: center;
+    height: 20%;
+    .calendarTop__this-month {
+      @extend .flex-row;
+      @extend .flex-center;
+    }
+    button {
+      @extend .flex-row;
+      @extend .flex-center;
+      font-size: 3rem;
+      background-color: transparent;
+      border: none;
+      padding: 0 2rem;
+      cursor: pointer;
+    }
+  }
+  .calendarBttm {
+    padding: b.$content-padding;
+    font-size: 1.5rem;
+    height: 80%;
+    @extend .flex-column;
+    .days,
+    .dates {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+    }
+    .days {
+      flex-basis: 0;
+      flex-shrink: 0;
+      min-height: 2rem;
+    }
+    .dates {
+      flex-basis: 0;
+      flex-grow: 8;
+    }
+    .dates__date {
+      border-top: 1px solid gray;
+      cursor: pointer;
+      .studentInCal {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 3px;
+        font-size: 1.5rem;
+      }
+    }
+    .dates__date:hover {
+      background-color: b.$gray;
+    }
+  }
+  .calendar__homework-lists {
+    position: relative;
+    background-color: b.$gray;
+    flex-grow: 4;
+    flex-basis: 0;
+    overflow: auto;
+    word-break: break-all;
+    .calendar__homework-lists__close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      @extend .flex-row;
+      @extend .flex-center;
+      cursor: pointer;
+      font-size: 3rem;
+      border-radius: 50%;
+    }
+    .calendar__homework-lists__close-btn:hover {
+      background-color: b.$main-color--deep;
+    }
+    .calendar__homework-lists__date {
+      @extend .font--small-title;
+      text-align: center;
+      padding: 2rem;
+    }
+    .calendar__homework-lists__list {
+      padding: 1rem 3rem;
+      .calendar__homework-list__student {
+        @extend .font--small-title;
+        @extend .flex-row;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        font-size: 2rem;
+      }
+      .calendar__homework-list__content {
+        background-color: white;
+        padding: 1rem 2rem;
+        font-size: 1.8rem;
+      }
+    }
+  }
+  .calendar__add-hwmk-btn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: b.$main-color--light;
+  }
+}

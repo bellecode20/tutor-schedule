@@ -1,0 +1,137 @@
+@use "basic" as b;
+.color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: b.$coral;
+}
+.build-profile {
+  position: relative;
+  height: 100%;
+  .buildProfileSaveBtn {
+    @extend .saveBtn;
+    @extend .font--small-title;
+  }
+}
+.studentInfo {
+  height: b.$page-content-ratio--with-btn;
+  overflow: auto;
+}
+.studentInfo--bttm {
+  padding: b.$content-padding;
+  .studentInfo__highlight {
+    background-color: b.$main-color;
+    font-weight: bold;
+    font-size: b.$font-size--smallest;
+    display: inline-block;
+    line-height: 2rem;
+    text-align: center;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 3px;
+  }
+  .studentInfo__margin {
+    margin-right: 0.5rem;
+  }
+  .studentInfo__name,
+  .studentInfo__school,
+  .studentInfo__age,
+  .studentInfo__wage,
+  .studentInfo__first-date,
+  .studentInfo__days,
+  .studentInfo__color,
+  .studentInfo__memo {
+    @extend .subject--container-size;
+  }
+  > div {
+    @extend .flex-row;
+    align-items: center;
+    font-size: b.$font-size--small;
+    input {
+      @extend .subject--container__input;
+      font-size: b.$font-size--small;
+    }
+    .studentInfo__name__title,
+    .studentInfo__school__title,
+    .studentInfo__age__title,
+    .studentInfo__wage__title,
+    .studentInfo__first-date__title,
+    .studentInfo__days__title,
+    .studentInfo__color__title,
+    .studentInfo__memo__title {
+      @extend .font--small-title;
+      @extend .flex-row;
+      @extend .flex-center;
+      min-width: 20vw;
+    }
+    .studentInfo__days__content {
+      @extend .flex-row;
+      input {
+        display: none;
+      }
+      .dayLabel__Div {
+        @extend .flex-row;
+        @extend .flex-center;
+        background-color: b.$main-color--light;
+        color: b.$sub-font-color--gray;
+        height: 2.5rem;
+        width: 2.5rem;
+        margin-right: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      label:hover {
+        .dayLabel__Div {
+          font-weight: bold;
+          background-color: b.$main-color--deep;
+        }
+      }
+      .dayChecked {
+        font-weight: bold;
+        background-color: b.$main-color--deep;
+      }
+    }
+    .studentInfo__wage__content {
+      padding: 1.5rem 0;
+      .studentInfo__wage__args {
+        @extend .flex-column;
+        gap: 0.5rem;
+        padding-bottom: 1.5rem;
+      }
+      .studentInfo__wage__args__onweek {
+        @extend .flex-row;
+      }
+      .studentInfo__wage__result {
+        @extend .flex-row;
+      }
+      input {
+        text-align: center;
+        height: 2rem;
+        width: 2rem;
+      }
+    }
+    .studentInfo__color__inputContainer {
+      @extend .flex-row;
+      @extend .flex-center;
+      .colorInput {
+        display: none;
+      }
+      .colorLabelDiv {
+        min-height: auto;
+        height: 2rem;
+        width: 2rem;
+        margin-right: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      label:hover {
+        .colorLabelDiv {
+          filter: brightness(80%);
+        }
+      }
+      .colorLabelDarker {
+        border: 3px solid rgb(131, 131, 131);
+      }
+    }
+  }
+}

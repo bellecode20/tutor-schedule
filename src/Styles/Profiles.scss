@@ -1,0 +1,51 @@
+@use "basic" as b;
+.Profiles {
+  height: 100%;
+}
+.profiles__main {
+  height: 100vh;
+  .profiles__deleteBtn {
+    @extend .font--small-title;
+    @extend .flex-row;
+    @extend .flex-center;
+    cursor: pointer;
+    padding: 1rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: b.$font-size--smallest;
+  }
+  .profiles__deleteBtn:hover {
+    background-color: b.$main-color;
+    border-radius: 3rem;
+    padding: 1rem;
+  }
+}
+.profiles__students {
+  padding: b.$content-padding;
+  height: b.$page-content-ratio--without-btn;
+  overflow: auto;
+}
+.profiles__profile {
+  @extend .flex-row;
+  justify-content: space-between;
+  align-items: center;
+  height: 12vh;
+  margin-top: 10px;
+  padding: 0 3rem;
+  border-radius: 10px;
+  .profiles__profile__name {
+    @extend .font--small-title;
+    font-size: b.$font-size--big;
+  }
+  .propfiles__profile__deleteBtn {
+    @extend .flex-row;
+    @extend .flex-center;
+    // background-color: #f2f2f2;
+    font-size: 3rem;
+    cursor: pointer;
+  }
+}
+.profiles__profile:hover {
+  filter: brightness(90%);
+}

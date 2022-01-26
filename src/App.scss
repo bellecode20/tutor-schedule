@@ -1,0 +1,25 @@
+@use "./Styles/basic.scss" as b;
+@import "./Styles/mediaQuery";
+html,
+body {
+  font-size: 0.625em;
+  @include for-tablet-portrait-up {
+    font-size: 0.9375em;
+  }
+  @include for-tablet-landscape-up {
+    font-size: 1.0625;
+  }
+}
+.App {
+  @extend .font--basic-content;
+  height: 100vh;
+  font-size: 2rem;
+  color: b.$main-font-color;
+  button,
+  input {
+    font-size: 2rem;
+  }
+}
+a {
+  @extend .link--remove-style;
+}
