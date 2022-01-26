@@ -44,7 +44,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-          path="/"
+          path={process.env.PUBLIC_URL + "/"}
           element={
             <Calendar
               student={student}
@@ -54,7 +54,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/homeworkview/:clickedDate"
+          path={process.env.PUBLIC_URL + "/homeworkview/:clickedDate"}
           element={
             <BuildHomework
               student={student}
@@ -70,7 +70,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/buildprofile"
+          path={process.env.PUBLIC_URL + "/buildprofile"}
           element={
             <BuildProfile
               student={student}
@@ -85,7 +85,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/profiles"
+          path={process.env.PUBLIC_URL + "/profiles"}
           element={
             <Profiles
               student={student}
@@ -101,7 +101,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/profiles/:profileIdInUrl"
+          path={process.env.PUBLIC_URL + "/profiles/:profileIdInUrl"}
           element={
             <DetailedProfile
               student={student}
