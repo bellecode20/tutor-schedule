@@ -44,7 +44,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-          path="/"
+          path="/tutor-schedule"
           element={
             <Calendar
               student={student}
