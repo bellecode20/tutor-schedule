@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import "./Styles/reset.scss";
 import "./App.scss";
 import "./Styles/_mediaQuery.scss";
-// import dayjs from "dayjs";
 import { Route, Routes } from "react-router-dom";
 import Calendar from "./Components/Calendar.js";
 import BuildHomework from "./Components/BuildHomework";
 import BuildProfile from "./Components/BuildProfile";
 import Profiles from "./Components/Profiles";
 import DetailedProfile from "./Components/DetailedProfile";
-import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import NotFound from "./Components/NotFound";
 import ErrorModal from "./Components/ErrorModal.js";
 
@@ -44,7 +42,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-          path="/tutor-schedule"
+          path="tutor-schedule"
           element={
             <Calendar
               student={student}
@@ -90,7 +88,7 @@ function App() {
             <Profiles
               student={student}
               setStudent={setStudent}
-              HomeRoundedIcon={HomeRoundedIcon}
+              // HomeRoundedIcon={HomeRoundedIcon}
               modalShow={modalShow}
               setModalShow={setModalShow}
               mainModalText={mainModalText}
@@ -106,7 +104,7 @@ function App() {
             <DetailedProfile
               student={student}
               setStudent={setStudent}
-              HomeRoundedIcon={HomeRoundedIcon}
+              // HomeRoundedIcon={HomeRoundedIcon}
             ></DetailedProfile>
           }
         ></Route>

@@ -1,4 +1,3 @@
-import { el } from "date-fns/locale";
 import React, { useEffect, useState } from "react";
 import {
   BiHome,
