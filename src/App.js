@@ -52,7 +52,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/homeworkview/:clickedDate"
+          path="/tutor-schedule/homeworkview/:clickedDate"
           element={
             <BuildHomework
               student={student}
@@ -68,7 +68,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/buildprofile"
+          path="/tutor-schedule/buildprofile"
           element={
             <BuildProfile
               student={student}
@@ -83,7 +83,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/profiles"
+          path="/tutor-schedule/profiles"
           element={
             <Profiles
               student={student}
@@ -99,7 +99,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/profiles/:profileIdInUrl"
+          path="/tutor-schedule/profiles/:profileIdInUrl"
           element={
             <DetailedProfile
               student={student}

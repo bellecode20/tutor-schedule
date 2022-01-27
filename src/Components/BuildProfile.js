@@ -286,7 +286,10 @@ const BuildProfile = ({
           className="nav-btn"
           onClick={() => navigate(-1)}
         ></BiLeftArrowAlt>
-        <BiHome className="nav-btn" onClick={() => navigate("/")}></BiHome>
+        <BiHome
+          className="nav-btn"
+          onClick={() => navigate("/tutor-schedule")}
+        ></BiHome>
       </div>
       <div className="page-title">개인 프로필</div>
       <div className="titleLine"></div>

@@ -38,7 +38,7 @@ const Profiles = ({
   const studentInfoMap = student.map((info, i) => (
     <Link
       key={i}
-      to={`/profiles/:${info.id}`}
+      to={`/tutor-schedule/profiles/:${info.id}`}
       onClick={(e) => deleteState == true && e.preventDefault()}
     >
       <div className={`${info.color} profiles__profile`}>
@@ -87,7 +87,10 @@ const Profiles = ({
           className="nav-btn"
           onClick={() => navigate(-1)}
         ></BiLeftArrowAlt>
-        <BiHome className="nav-btn" onClick={() => navigate("/")}></BiHome>
+        <BiHome
+          className="nav-btn"
+          onClick={() => navigate("/tutor-schedule")}
+        ></BiHome>
       </div>
       <div className="profiles__main">
         <div>

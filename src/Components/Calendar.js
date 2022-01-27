@@ -160,16 +160,19 @@ const Calendar = ({ student, homework, setHomework }) => {
           <div onClick={showMenu} className="calendar__menu__close-btn nav-btn">
             <BiX className=""></BiX>
           </div>
-          <Link to="/buildprofile" className="link--remove-style">
+          <Link
+            to="/tutor-schedule/buildprofile"
+            className="link--remove-style"
+          >
             <div className="calendar__menu__list">학생 추가</div>
           </Link>
           <div className="menu__line"></div>
-          <Link to="/profiles" className="link--remove-style">
+          <Link to="/tutor-schedule/profiles" className="link--remove-style">
             <div className="calendar__menu__list">학생 모아보기</div>
           </Link>
           <div className="menu__line"></div>
           <Link
-            to={`/homeworkview/:${year}-${month}-${date}`}
+            to={`/tutor-schedule/homeworkview/:${year}-${month}-${date}`}
             className="link--remove-style"
           >
             <div className="calendar__menu__list">숙제 추가</div>
@@ -292,7 +295,7 @@ const Calendar = ({ student, homework, setHomework }) => {
         </div>
       ) : null}
       <Link
-        to={`/homeworkview/:${year}-${month}-${date}`}
+        to={`/tutor-schedule/homeworkview/:${year}-${month}-${date}`}
         className="link--remove-style"
       >
         <div className="calendar__add-hwmk-btn">
