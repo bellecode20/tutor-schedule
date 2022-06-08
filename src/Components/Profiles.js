@@ -28,7 +28,7 @@ const Profiles = ({ student, setStudent, modalShow }) => {
   const studentInfoMap = student.map((info, i) => (
     <Link
       key={i}
-      to={`${REACT_APP_PATH}/profiles/:${info.id}`}
+      to={`${process.env.REACT_APP_PATH}/profiles/:${info.id}`}
       onClick={(e) => deleteState == true && e.preventDefault()}
     >
       <div className={`${info.color} profiles__profile`}>
