@@ -42,7 +42,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-          path="/tutor-schedule"
+          path={process.env.REACT_APP_PATH}
           element={
             <Calendar
               student={student}
@@ -52,7 +52,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/tutor-schedule/homeworkview/:clickedDate"
+          path={`${process.env.REACT_APP_PATH}/homeworkview/:clickedDate`}
           element={
             <BuildHomework
               student={student}
@@ -68,7 +68,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/tutor-schedule/buildprofile"
+          path={`${process.env.REACT_APP_PATH}/buildprofile`}
           element={
             <BuildProfile
               student={student}
@@ -83,7 +83,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/tutor-schedule/profiles"
+          path={`${process.env.REACT_APP_PATH}/profiles`}
           element={
             <Profiles
               student={student}
@@ -99,12 +99,11 @@ function App() {
           }
         ></Route>
         <Route
-          path="/tutor-schedule/profiles/:profileIdInUrl"
+          path={`${process.env.REACT_APP_PATH}/profiles/:profileIdInUrl`}
           element={
             <DetailedProfile
               student={student}
               setStudent={setStudent}
-              // HomeRoundedIcon={HomeRoundedIcon}
             ></DetailedProfile>
           }
         ></Route>

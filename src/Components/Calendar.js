@@ -161,18 +161,21 @@ const Calendar = ({ student, homework, setHomework }) => {
             <BiX className=""></BiX>
           </div>
           <Link
-            to="/tutor-schedule/buildprofile"
+            to={`${process.env.REACT_APP_PATH}/buildprofile`}
             className="link--remove-style"
           >
             <div className="calendar__menu__list">학생 추가</div>
           </Link>
           <div className="menu__line"></div>
-          <Link to="/tutor-schedule/profiles" className="link--remove-style">
+          <Link
+            to={`${process.env.REACT_APP_PATH}/profiles`}
+            className="link--remove-style"
+          >
             <div className="calendar__menu__list">학생 모아보기</div>
           </Link>
           <div className="menu__line"></div>
           <Link
-            to={`/tutor-schedule/homeworkview/:${year}-${month}-${date}`}
+            to={`${process.env.REACT_APP_PATH}/homeworkview/:${year}-${month}-${date}`}
             className="link--remove-style"
           >
             <div className="calendar__menu__list">숙제 추가</div>
@@ -295,7 +298,7 @@ const Calendar = ({ student, homework, setHomework }) => {
         </div>
       ) : null}
       <Link
-        to={`/tutor-schedule/homeworkview/:${year}-${month}-${date}`}
+        to={`${process.env.REACT_APP_PATH}/homeworkview/:${year}-${month}-${date}`}
         className="link--remove-style"
       >
         <div className="calendar__add-hwmk-btn">

@@ -288,7 +288,7 @@ const BuildProfile = ({
         ></BiLeftArrowAlt>
         <BiHome
           className="nav-btn"
-          onClick={() => navigate("/tutor-schedule")}
+          onClick={() => navigate(process.env.REACT_APP_PATH)}
         ></BiHome>
       </div>
       <div className="page-title">개인 프로필</div>

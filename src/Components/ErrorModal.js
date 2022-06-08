@@ -77,7 +77,7 @@ const ErrorModal = ({
             ),
             noStudentInHomework: (
               <Link
-                to="/tutor-schedule/buildprofile"
+                to={`${process.env.REACT_APP_PATH}/buildprofile"`}
                 className="modal__do-btn"
                 onClick={() => {
                   closeModal();
@@ -93,7 +93,7 @@ const ErrorModal = ({
           {
             noStudentInHomework: (
               <Link
-                to="/tutor-schedule"
+                to={process.env.REACT_APP_PATH}
                 className="modal__cancel-btn"
                 onClick={closeModal}
               >
