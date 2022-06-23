@@ -102,7 +102,6 @@ const BuildHomework = ({
       localStorage.getItem("profilesKey") == null ||
       JSON.parse(localStorage.getItem("profilesKey")).length == 0
     ) {
-      console.log("h");
       setMainModalText("noStudentInHomework");
       setSubModalText("noStudentInHomework");
       setModalShow(true);

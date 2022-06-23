@@ -6,10 +6,10 @@ import {
   BiMenu,
   BiChevronLeft,
   BiChevronRight,
-  BiTrash,
 } from "react-icons/bi";
 import "../Styles/basic.scss";
 import "../Styles/calendar.scss";
+import HomeworksByDate from "./HomeworksByDate";
 const Calendar = ({ student, homework, setHomework }) => {
   let [today, setToday] = useState(new Date());
   let date = today.getDate();
@@ -81,65 +81,44 @@ const Calendar = ({ student, homework, setHomework }) => {
   ];
 
   const fullDayOfThisDate = (date, i) => {
-    const onlyOneInCalendar =
-      fullDatesOfMonth.indexOf(date) == fullDatesOfMonth.lastIndexOf(date);
-    const lateInMonth = 22 <= date && date <= 31;
-    const earlyInMonth = 1 <= date && date <= 6;
-    const arr = [];
-    let idx = fullDatesOfMonth.indexOf(date);
-
-    //date가 fullDatesOfMonth안에서 존재하지 않을 떄까지 반복문을 실행한다.
-    while (idx != -1) {
-      //date를 배열에 넣는다.
-      arr.push(idx);
-      //이제 방금 넣은 값 뒤에서부터 반복문을 실행해야 하므로, idx를 방금 넣은 값의 바로 뒷 값으로 다시 정의한다.
-      idx = fullDatesOfMonth.indexOf(date, idx + 1);
+    const firstWeek = i <= 6;
+    const lastWeek = i >= 22;
+    // 달력의 첫번째 주인데 날짜가 22~31일 사이라면 이전 달 날짜다.
+    if (firstWeek && 22 <= date && date <= 31) {
+      if (month == 1) return `${year - 1}-12-${date}`;
+      return `${year}-${month - 1}-${date}`;
     }
-    //다음달 날짜가 이번달 마지막 줄에 껴있을 때
-    if (!onlyOneInCalendar && i >= 7 && earlyInMonth && arr.indexOf(i) == 1) {
-      return `${year}-${month + 1 == 13 ? 1 : month + 1}-${date}`;
+    // 달력의 마지막 주인데 날짜가 1~6일 사이라면 다음 달 날짜다.
+    else if (lastWeek && date <= 6) {
+      if (month == 12) return `${year + 1}-1-${date}`;
+      return `${year}-${month + 1}-${date}`;
     }
-    //저번달 날짜가 이번달 첫째줄에 껴있을 때
-    else if (
-      !onlyOneInCalendar &&
-      i <= 6 &&
-      lateInMonth &&
-      arr.indexOf(i) == 0
-    ) {
-      return `${year}-${month - 1 == 0 ? 12 : month - 1}-${date}`;
-    } //22~31일이 이번달 첫째 줄에 나올때. 저번달 날짜가 이번달에 처음 나올 때이다.
-    else if (onlyOneInCalendar && lateInMonth && i <= 6) {
-      return `${year}-${month - 1 == 0 ? 12 : month - 1}-${date}`;
-    } else {
-      return `${year}-${month}-${date}`;
-    }
+    return `${year}-${month}-${date}`;
   };
 
   //캘린더에서 날짜 칸을 누르면 숙제 목록 창이 뜬다.
   const [displayHomeworks, setDisplayHomeworks] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
-
+  const closeHomeworks = () => {
+    setDisplayHomeworks(false);
+  };
   //클릭한 칸의 날짜에 해당하는 homework데이터를 보여주어야 한다.
   //클릭한 칸의 attribute에서 날짜 정보를 얻는다. 한자리수는 앞에 0을 붙여준다.
   const showHomeworks = (e) => {
     setDisplayHomeworks(true);
-    const targetDate = e.target.getAttribute("data-full-date");
-    if (targetDate != null) {
-      const targetDateArr = targetDate
-        .split("-")
-        .map((el) => (el.length == 1 ? "0".concat(el) : el));
-      setSelectedDate(
-        `${targetDateArr[0]}-${targetDateArr[1]}-${targetDateArr[2]}`
-      );
-    }
+    const targetDate = e.currentTarget.getAttribute("data-full-date");
+    const targetDateArr = targetDate
+      .split("-")
+      .map((el) => (el.length == 1 ? "0".concat(el) : el));
+    setSelectedDate(
+      `${targetDateArr[0]}-${targetDateArr[1]}-${targetDateArr[2]}`
+    );
   };
 
   //클릭한 숙제를 삭제한다.
   const deleteHomework = (info) => {
-    console.log(info.id);
     const getHomeworks = JSON.parse(localStorage.getItem("homeworksKey"));
     const afterDelete = getHomeworks.filter((el) => el.id != info.id);
-    console.log(afterDelete);
     setHomework(afterDelete);
   };
   useEffect(() => {
@@ -150,12 +129,63 @@ const Calendar = ({ student, homework, setHomework }) => {
   const showMenu = () => {
     setDisplayMenu(!displayMenu);
   };
+  const hasStudent = (info, day, i, date) => {
+    const startYear = Number(info.firstDate.substring(0, 4));
+    const startMonth = Number(info.firstDate.substring(5, 7));
+    const startDate = Number(info.firstDate.substring(8, 10));
+    const isLessonDay = info.days.includes(day);
+    const isPrevMonthDate = (i) => {
+      if (i <= 6 && 22 <= date && date <= 31) return true;
+      return false;
+    };
+    const isNextMonthDate = (i) => {
+      if (i >= 22 && date <= 6) return true;
+      return false;
+    };
+    const checkMonth = () => {
+      // 12월과 1월은 연도가 바뀌어도 한 달 차이가 나는 달이기 때문에 다른 조건을 달았다.
+      if (month == 12 && startMonth == 1) {
+        // 예를 들어 2021년 12월 달력인데 시작한 년도는 2022년 1월일 때이다.
+        if (startYear - year == 1) return "isPrevMonth";
+      }
+      if (month == 1 && startMonth == 12) {
+        // 예를 들어 2023년 1월 달력인데 시작한 년도는 2022년 12월일 때이다.
+        if (year - startYear == 1) return "isNextMonth";
+      }
+      // 연도에 따라 구분한다.
+      if (year == startYear) {
+        // 한 달 차이가 나는 달이다.
+        if (startMonth - month == 1) return "isPrevMonth";
+        if (month - startMonth == 1) return "isNextMonth";
+        // 이전 달, 다음 달, 이번 달이다.
+        if (month < startMonth) return "olderMonth";
+        if (month > startMonth) return "futureMonth";
+        if (month == startMonth) return "sameMonth";
+      } else if (year < startYear) return "olderMonth";
+      else if (year > startYear) return "futureMonth";
+    };
+    if (!isLessonDay) return false;
+    if (checkMonth() == "isPrevMonth") {
+      if (isNextMonthDate(i) && date >= startDate) return true;
+      else return false;
+    }
+    if (checkMonth() == "isNextMonth") {
+      return true;
+    }
+    if (checkMonth() == "olderMonth") return false;
+    if (checkMonth() == "futureMonth") return true;
+    if (checkMonth() == "sameMonth") {
+      if (isPrevMonthDate(i)) return false;
+      if (isNextMonthDate(i)) return true;
+      if (date >= startDate) return true;
+    }
+  };
   return (
     <div className="calendar">
       <div onClick={showMenu} className="calendar__show-menu-btn nav-btn">
         <BiMenu className=""></BiMenu>
       </div>
-      {displayMenu == true ? (
+      {displayMenu && (
         <div className="calendar__menu">
           <div onClick={showMenu} className="calendar__menu__close-btn nav-btn">
             <BiX className=""></BiX>
@@ -182,9 +212,8 @@ const Calendar = ({ student, homework, setHomework }) => {
           </Link>
           <div className="menu__line"></div>
         </div>
-      ) : null}
-
-      <div className="캘린더">
+      )}
+      <div className="calendar-only">
         <div className="calendarTop">
           <div className="calendarTop__this-month">
             <button className="calendarTop__button--left" onClick={toPrevMonth}>
@@ -219,84 +248,28 @@ const Calendar = ({ student, homework, setHomework }) => {
                 onClick={showHomeworks}
               >
                 {date}
-                {student.map((info, studentIndex) => (
-                  <div key={info.id}>
-                    {/* year도 같고, month도 같을 때, 달력 두번째 줄부터는 findIndex */}
-                    {(info.days.includes(daysToNumArray[i]) &&
-                      year == Number(info.firstDate.substring(0, 4)) &&
-                      month == Number(info.firstDate.substring(5, 7)) &&
-                      fullDatesOfMonth.findIndex(
-                        (x) => x == Number(info.firstDate.substring(8, 10))
-                      ) >= 7 &&
-                      i >=
-                        fullDatesOfMonth.findIndex(
-                          (x) => x == Number(info.firstDate.substring(8, 10))
-                        )) ||
-                    //year도 같고, month도 같을 때, 달력 첫번째 줄은 lastIndexOf
-                    (info.days.includes(daysToNumArray[i]) &&
-                      year == Number(info.firstDate.substring(0, 4)) &&
-                      month == Number(info.firstDate.substring(5, 7)) &&
-                      fullDatesOfMonth.findIndex(
-                        (x) => x == Number(info.firstDate.substring(8, 10))
-                      ) <= 6 &&
-                      i >=
-                        fullDatesOfMonth.lastIndexOf(
-                          Number(info.firstDate.substring(8, 10))
-                        )) ||
-                    //year은 같고, month는 다를 때
-                    (info.days.includes(daysToNumArray[i]) &&
-                      year == Number(info.firstDate.substring(0, 4)) &&
-                      month > Number(info.firstDate.substring(5, 7))) ||
-                    //year이 더 크고(이전일 때), month가 작을 때
-                    (info.days.includes(daysToNumArray[i]) &&
-                      year > Number(info.firstDate.substring(0, 4)) &&
-                      month < Number(info.firstDate.substring(5, 7))) ||
-                    //year이 더 크고(이전일 때), month가 같을 때(이전 같은 달)
-                    (info.days.includes(daysToNumArray[i]) &&
-                      year > Number(info.firstDate.substring(0, 4)) &&
-                      month == Number(info.firstDate.substring(5, 7)) &&
-                      i >= 7 &&
-                      i >=
-                        fullDatesOfMonth.findIndex(
-                          (x) => x == Number(info.firstDate.substring(8, 10))
-                        )) ? (
-                      <div className={`${info.color} studentInCal`}></div>
-                    ) : null}
-                  </div>
-                ))}
+                <div className="dates__studentColors">
+                  {student.map((info, studentIndex) => (
+                    <div key={info.id}>
+                      {hasStudent(info, daysToNumArray[i], i, date) && (
+                        <div className={`${info.color} studentInCal`}></div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-      {displayHomeworks == true ? (
-        <div className="calendar__homework-lists">
-          <div
-            className="calendar__homework-lists__close-btn nav-btn"
-            onClick={() => setDisplayHomeworks(false)}
-          >
-            <BiX></BiX>
-          </div>
-          <div className="calendar__homework-lists__date">{selectedDate}</div>
-          {homework.map((info, i) =>
-            selectedDate == info.homeworkDate ? (
-              <div key={i} className="calendar__homework-lists__list">
-                <div
-                  className={`calendar__homework-list__student ${info.color}`}
-                >
-                  {info.homeworkStudent}
-                  <div onClick={() => deleteHomework(info)}>
-                    <BiTrash></BiTrash>
-                  </div>
-                </div>
-                <div className="calendar__homework-list__content">
-                  {info.homeworkInput}
-                </div>
-              </div>
-            ) : null
-          )}
-        </div>
-      ) : null}
+      {displayHomeworks && (
+        <HomeworksByDate
+          closeHomeworks={closeHomeworks}
+          selectedDate={selectedDate}
+          homework={homework}
+          deleteHomework={deleteHomework}
+        ></HomeworksByDate>
+      )}
       <Link
         to={`${process.env.REACT_APP_PATH}/homeworkview/:${year}-${month}-${date}`}
         className="link--remove-style"

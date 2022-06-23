@@ -10,7 +10,6 @@ const ErrorModal = ({
   const closeModal = () => {
     setModalShow(false);
   };
-  console.log(mainModalText);
   return (
     <div className="modal-container">
       <div className="modal__overlay"></div>
@@ -77,7 +76,7 @@ const ErrorModal = ({
             ),
             noStudentInHomework: (
               <Link
-                to={`${process.env.REACT_APP_PATH}/buildprofile"`}
+                to={`${process.env.REACT_APP_PATH}/buildprofile`}
                 className="modal__do-btn"
                 onClick={() => {
                   closeModal();
