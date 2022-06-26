@@ -4,10 +4,11 @@ html,
 body {
   font-size: 0.625em;
   @include for-tablet-portrait-up {
-    font-size: 0.9375em;
+    // font-size: 0.9375em;
   }
   @include for-tablet-landscape-up {
-    font-size: 1.0625;
+    // font-size: 1em;
+    // font-size: 1.0625em;
   }
 }
 .App {

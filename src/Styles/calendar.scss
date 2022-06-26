@@ -63,7 +63,7 @@
     }
   }
   .calendarBttm {
-    padding: b.$content-padding;
+    // padding: b.$content-padding;
     font-size: 1.5rem;
     height: 80%;
     @extend .flex-column;
@@ -100,58 +100,6 @@
     }
     .dates__date:hover {
       background-color: b.$gray;
-    }
-  }
-  .calendar__homework-lists {
-    z-index: 10;
-    position: relative;
-    background-color: b.$gray;
-    flex-grow: 4;
-    flex-basis: 0;
-    overflow: auto;
-    word-break: break-all;
-    .calendar__homework-lists__close-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      @extend .flex-row;
-      @extend .flex-center;
-      cursor: pointer;
-      font-size: 3rem;
-      border-radius: 50%;
-    }
-    .calendar__homework-lists__close-btn:hover {
-      background-color: b.$main-color--deep;
-    }
-    .calendar__homework-lists__date {
-      @extend .font--small-title;
-      text-align: center;
-      padding: 2rem;
-    }
-    .calendar__homework-lists__list {
-      padding: 1rem 3rem;
-      .calendar__homework-list__student {
-        @extend .font--small-title;
-        @extend .flex-row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 2px 2rem;
-        font-size: 2rem;
-      }
-      .calendar__homework-list__delete {
-        padding: 5px;
-      }
-      .calendar__homework-list__delete:hover {
-        background-color: white;
-        cursor: pointer;
-        padding: 5px;
-        border-radius: 50%;
-      }
-      .calendar__homework-list__content {
-        background-color: white;
-        padding: 1rem 2rem;
-        font-size: 1.8rem;
-      }
     }
   }
   .calendar__add-hwmk-btn {

@@ -58,9 +58,12 @@ $coral: #e97b6e;
 $gray: #f2f2f2;
 $deep-gray: #dadada;
 $content-padding: 1vh 3vh;
-$font-size--smallest: 1.5rem;
-$font-size--small: 1.8rem;
-$font-size--big: 2.3rem;
+$font-size--smallest: 1.4rem;
+$font-size--small: 1.6rem;
+$font-size--big: 2rem;
+// $font-size--smallest: 1.5rem;
+// $font-size--small: 1.8rem;
+// $font-size--big: 2.3rem;
 $main-color: #edf2ff;
 $main-color--light: #f5f8ff;
 $main-color--deep: #d3e0ff;
@@ -191,11 +194,6 @@ $page-content-ratio--with-btn: 65vh;
   color: $main-font-color;
 }
 //Modal
-.modal-container {
-  // position: absolute;
-  // width: 100%;
-  // height: 100%;
-}
 .modal__overlay {
   background-color: rgba(0, 0, 0, 0.212);
   width: 100vw;

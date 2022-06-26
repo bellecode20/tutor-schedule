@@ -54,7 +54,10 @@ const DetailedProfile = ({ student, setStudent, HomeRoundedIcon }) => {
           className="nav-btn"
           onClick={() => navigate(-1)}
         ></BiLeftArrowAlt>
-        <BiHome className="nav-btn" onClick={() => navigate("/")}></BiHome>
+        <BiHome
+          className="nav-btn"
+          onClick={() => navigate(process.env.REACT_APP_PATH)}
+        ></BiHome>
       </div>
       <div className="profiles__main">
         <div>

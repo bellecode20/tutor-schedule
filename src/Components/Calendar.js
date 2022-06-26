@@ -180,6 +180,15 @@ const Calendar = ({ student, homework, setHomework }) => {
       if (date >= startDate) return true;
     }
   };
+  const [lessonStudentArr, setLessonStudentArr] = useState([]);
+  const makeLessonStudentsArr = (dayNum, i, date) => {
+    setLessonStudentArr(
+      student.filter((info) => {
+        return hasStudent(info, dayNum, i, date);
+      })
+    );
+  };
+  console.log(lessonStudentArr);
   return (
     <div className="calendar">
       <div onClick={showMenu} className="calendar__show-menu-btn nav-btn">
@@ -245,7 +254,11 @@ const Calendar = ({ student, homework, setHomework }) => {
                 key={i}
                 data-요일={daysToNumArray[i]}
                 data-full-date={fullDayOfThisDate(date, i)}
-                onClick={showHomeworks}
+                onClick={(e) => {
+                  showHomeworks(e);
+                  makeLessonStudentsArr(daysToNumArray[i], i, date);
+                }}
+                // onClick={showHomeworks}
               >
                 {date}
                 <div className="dates__studentColors">
@@ -268,6 +281,7 @@ const Calendar = ({ student, homework, setHomework }) => {
           selectedDate={selectedDate}
           homework={homework}
           deleteHomework={deleteHomework}
+          lessonStudentArr={lessonStudentArr} // 이 줄만 추가
         ></HomeworksByDate>
       )}
       <Link
