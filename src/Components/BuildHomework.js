@@ -58,7 +58,6 @@ const BuildHomework = ({
   );
 
   const homeworkSave = (e) => {
-    e.preventDefault();
     const getExistStu = () => {
       const existStuArr = homework.filter((el) => {
         return (

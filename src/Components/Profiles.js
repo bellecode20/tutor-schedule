@@ -5,7 +5,6 @@ import {
   BiCircle,
   BiCheckCircle,
 } from "react-icons/bi";
-
 import { Link, useNavigate } from "react-router-dom";
 import "../Styles/basic.scss";
 import "../Styles/Profiles.scss";
