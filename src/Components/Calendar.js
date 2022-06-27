@@ -189,6 +189,7 @@ const Calendar = ({ student, homework, setHomework }) => {
     );
   };
   console.log(lessonStudentArr);
+  console.log(homework);
   return (
     <div className="calendar">
       <div onClick={showMenu} className="calendar__show-menu-btn nav-btn">

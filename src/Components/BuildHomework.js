@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { BiHome, BiLeftArrowAlt, BiErrorCircle } from "react-icons/bi";
 import ErrorModal from "./ErrorModal.js";
-
 import "../Styles/BuildHomework.scss";
 const BuildHomework = ({
   student,
@@ -15,6 +14,7 @@ const BuildHomework = ({
   subModalText,
   setSubModalText,
 }) => {
+  console.log(homework);
   const navigate = useNavigate();
   const { clickedDate } = useParams();
   const [homeworkInfoObj, sethomeworkInfoObj] = useState();
@@ -58,11 +58,27 @@ const BuildHomework = ({
   );
 
   const homeworkSave = (e) => {
+    e.preventDefault();
+    const getExistStu = () => {
+      const existStuArr = homework.filter((el) => {
+        return (
+          el.homeworkDate == homeworkDateObj.homeworkDate &&
+          el.homeworkStudent == homeworkStudentObj.homeworkStudent
+        );
+      });
+      return existStuArr;
+    };
+    const existStuArr = getExistStu();
     const writtenYet =
       homeworkStudentObj.homeworkStudent == "" ||
       homeworkDateObj.homeworkDate == "" ||
       homeworkInputObj.homeworkInput == "";
-    if (!writtenYet) {
+    if (existStuArr.length > 0) {
+      e.preventDefault();
+      setMainModalText("existStuArr");
+      setSubModalText("existStuArr");
+      setModalShow(true);
+    } else if (!writtenYet) {
       const id = { id: new Date().valueOf() };
       //student에서 동일한 학생 이름을 찾아서, 그 때 고른 color 값으로 추가한다.
       const color = student.find(
@@ -170,14 +186,14 @@ const BuildHomework = ({
           저장
         </button>
       </form>
-      {modalShow ? (
+      {modalShow && (
         <ErrorModal
           modalShow={modalShow}
           setModalShow={setModalShow}
           mainModalText={mainModalText}
           subModalText={subModalText}
         />
-      ) : null}
+      )}
     </div>
   );
 };

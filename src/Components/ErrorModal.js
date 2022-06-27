@@ -17,7 +17,8 @@ const ErrorModal = ({
         <div className="modal__content__icon-wrap">
           {mainModalText == "sameName" ||
           mainModalText == "writtenYet" ||
-          mainModalText == "noStudentInHomework" ? (
+          mainModalText == "noStudentInHomework" ||
+          mainModalText == "existStuArr" ? (
             <svg
               className="modal__content__icon"
               xmlns="http://www.w3.org/2000/svg"
@@ -43,6 +44,7 @@ const ErrorModal = ({
               successSaving: "저장~",
               noStudentInHomework: "앗...",
               askDelete: "정말로요?",
+              existStuArr: "앗...",
             }[mainModalText]
           }
         </div>
@@ -54,6 +56,7 @@ const ErrorModal = ({
               successSaving: "저장했어요",
               noStudentInHomework: "숙제를 낼 학생이 없어요",
               askDelete: "삭제시 되돌릴 수 없어요",
+              existStuArr: "이미 숙제가 있어요",
             }[subModalText]
           }
         </div>
@@ -70,6 +73,11 @@ const ErrorModal = ({
               </div>
             ),
             successSaving: (
+              <div className="modal__okBtn" onClick={closeModal}>
+                닫기
+              </div>
+            ),
+            existStuArr: (
               <div className="modal__okBtn" onClick={closeModal}>
                 닫기
               </div>
