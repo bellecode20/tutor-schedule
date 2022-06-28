@@ -188,8 +188,6 @@ const Calendar = ({ student, homework, setHomework }) => {
       })
     );
   };
-  console.log(lessonStudentArr);
-  console.log(homework);
   return (
     <div className="calendar">
       <div onClick={showMenu} className="calendar__show-menu-btn nav-btn">
@@ -218,7 +216,7 @@ const Calendar = ({ student, homework, setHomework }) => {
             to={`${process.env.REACT_APP_PATH}/homeworkview/:${year}-${month}-${date}`}
             className="link--remove-style"
           >
-            <div className="calendar__menu__list">숙제 추가</div>
+            <div className="calendar__menu__list">오늘 숙제 추가</div>
           </Link>
           <div className="menu__line"></div>
         </div>
@@ -259,7 +257,6 @@ const Calendar = ({ student, homework, setHomework }) => {
                   showHomeworks(e);
                   makeLessonStudentsArr(daysToNumArray[i], i, date);
                 }}
-                // onClick={showHomeworks}
               >
                 {date}
                 <div className="dates__studentColors">
@@ -282,7 +279,7 @@ const Calendar = ({ student, homework, setHomework }) => {
           selectedDate={selectedDate}
           homework={homework}
           deleteHomework={deleteHomework}
-          lessonStudentArr={lessonStudentArr} // 이 줄만 추가
+          lessonStudentArr={lessonStudentArr}
         ></HomeworksByDate>
       )}
       <Link

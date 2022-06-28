@@ -63,14 +63,32 @@ const HomeworksByDate = ({
                 {hasHomework(stu) == "" ? (
                   <p className="homework-list__noContent">숙제가 없어요</p>
                 ) : (
-                  hasHomework(stu)
+                  <p style={{ whiteSpace: "pre-line" }}>{hasHomework(stu)}</p>
                 )}
               </div>
             </div>
           );
         })}
       </div>
-      <div className="calendar__homework-lists__addHmwk">
+      {lessonStudentArr.length == 0 ? (
+        <div className="calendar__homework-lists__addHmwk">
+          <button>
+            <div>오늘은 수업이 없어요</div>
+          </button>
+        </div>
+      ) : (
+        <div className="calendar__homework-lists__addHmwk">
+          <Link
+            to={`${process.env.REACT_APP_PATH}/homeworkview/:${selectedDate}`}
+            className="link--remove-style"
+          >
+            <button>
+              <BiPlus></BiPlus> 숙제
+            </button>
+          </Link>
+        </div>
+      )}
+      {/* <div className="calendar__homework-lists__addHmwk">
         <Link
           to={`${process.env.REACT_APP_PATH}/homeworkview/:${selectedDate}`}
           className="link--remove-style"
@@ -79,7 +97,7 @@ const HomeworksByDate = ({
             <BiPlus></BiPlus> 숙제
           </button>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

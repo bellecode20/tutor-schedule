@@ -291,7 +291,7 @@ const BuildProfile = ({
           onClick={() => navigate(process.env.REACT_APP_PATH)}
         ></BiHome>
       </div>
-      <div className="page-title">개인 프로필</div>
+      <div className="page-title">학생 추가</div>
       <div className="titleLine"></div>
       <form onSubmit={profileSubmit}>
         <div className="studentInfo">

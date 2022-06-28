@@ -7,6 +7,10 @@
   flex-grow: 4;
   flex-basis: 0;
   word-break: break-all;
+  padding: 0 15vw;
+  @include for-tablet-landscape-up {
+    padding: 0 20vw;
+  }
   .calendar__homework-lists__close-btn {
     @extend .flex-row;
     @extend .flex-center;
@@ -29,10 +33,16 @@
   .calendar__homework-lists__all-students {
     position: relative;
     overflow: auto;
-    height: 75%;
+    height: 70%;
+    @include for-tablet-portrait-up {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+    }
     .calendar__homework-lists__list {
-      flex-basis: 48%;
-      padding: 1rem 3rem;
+      flex-basis: 45%;
+      padding: 0.5rem calc((100% - 90%) / 4); //flex-basis후 남는 좌우 여백을 padding에 균등하게 배분한다.
       .calendar__homework-list__student {
         @extend .font--small-title;
         @extend .flex-row;
@@ -66,30 +76,16 @@
         color: rgb(192, 192, 192);
         font-size: 1rem;
       }
-      @include for-tablet-portrait-up {
-        padding: 0;
-      }
       @include for-tablet-landscape-up {
-        flex-basis: 33%;
-        padding: 0;
+        flex-basis: 30%;
+        padding: 0.5rem calc((100% - 90%) / 6);
       }
-      @include for-desktop-up {
-        flex-basis: 22%;
-        padding: 0;
-      }
-    }
-    @include for-tablet-portrait-up {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-left: 5%;
-      margin-right: 5%;
     }
   }
   .calendar__homework-lists__addHmwk {
     @extend .flex-row;
     @extend .flex-center;
-    height: 10%;
+    height: 15%;
     border: 0;
     button {
       @extend .flex-row;

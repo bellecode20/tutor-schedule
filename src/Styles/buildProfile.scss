@@ -51,6 +51,17 @@
       @extend .subject--container__input;
       font-size: b.$font-size--small;
     }
+    /* delete btn in input type number - Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* delete btn in input type number - Firefox */
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
     .studentInfo__name__title,
     .studentInfo__school__title,
     .studentInfo__age__title,

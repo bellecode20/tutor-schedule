@@ -14,7 +14,6 @@ const BuildHomework = ({
   subModalText,
   setSubModalText,
 }) => {
-  console.log(homework);
   const navigate = useNavigate();
   const { clickedDate } = useParams();
   const [homeworkInfoObj, sethomeworkInfoObj] = useState();
@@ -23,10 +22,14 @@ const BuildHomework = ({
   const selectStudentForhomework = (e) => {
     sethomeworkStudentValue(e.target.innerText);
   };
-  useEffect(
-    () => sethomeworkStudentObj({ homeworkStudent: homeworkStudentValue }),
-    [homeworkStudentValue]
-  );
+  useEffect(() => {
+    // 학생이 한 명인 경우엔 자동으로 설정한다.
+    if (getLessonDayStu().length == 1) {
+      sethomeworkStudentObj({ homeworkStudent: getLessonDayStu()[0].name });
+      return;
+    }
+    sethomeworkStudentObj({ homeworkStudent: homeworkStudentValue });
+  }, [homeworkStudentValue]);
 
   //날짜의 기본 값은 유저가 캘린더에서 클릭한 날짜, 즉 주소창에 있는 날짜로 설정한다.
   const thisDayArrFromUrl = clickedDate
@@ -39,9 +42,6 @@ const BuildHomework = ({
 
   //유저가 입력한 날짜를 객체로 만든다.
   const [homeworkDateObj, sethomeworkDateObj] = useState({});
-  const homeworkDateChg = (e) => {
-    sethomeworkDateValue(e.target.value);
-  };
   useEffect(
     () => sethomeworkDateObj({ homeworkDate: homeworkDateValue }),
     [homeworkDateValue]
@@ -56,26 +56,32 @@ const BuildHomework = ({
     () => sethomeworkInputObj({ homeworkInput: homeworkInputValue }),
     [homeworkInputValue]
   );
-
+  const getLessonDayStu = () => {
+    const clickedDayNum = new Date(clickedDate.slice(1)).getDay();
+    const lessonDayStu = student.filter((el) => {
+      return el.days.includes(clickedDayNum);
+    });
+    return lessonDayStu;
+  };
   const homeworkSave = (e) => {
-    const getExistStu = () => {
-      const existStuArr = homework.filter((el) => {
+    const getExistHomework = () => {
+      const existHomework = homework.filter((el) => {
         return (
           el.homeworkDate == homeworkDateObj.homeworkDate &&
           el.homeworkStudent == homeworkStudentObj.homeworkStudent
         );
       });
-      return existStuArr;
+      return existHomework;
     };
-    const existStuArr = getExistStu();
+    const existHomework = getExistHomework();
     const writtenYet =
       homeworkStudentObj.homeworkStudent == "" ||
       homeworkDateObj.homeworkDate == "" ||
       homeworkInputObj.homeworkInput == "";
-    if (existStuArr.length > 0) {
+    if (existHomework.length > 0) {
       e.preventDefault();
-      setMainModalText("existStuArr");
-      setSubModalText("existStuArr");
+      setMainModalText("existHomework");
+      setSubModalText("existHomework");
       setModalShow(true);
     } else if (!writtenYet) {
       const id = { id: new Date().valueOf() };
@@ -115,14 +121,14 @@ const BuildHomework = ({
   useEffect(() => {
     if (
       localStorage.getItem("profilesKey") == null ||
-      JSON.parse(localStorage.getItem("profilesKey")).length == 0
+      JSON.parse(localStorage.getItem("profilesKey")).length == 0 ||
+      getLessonDayStu().length == 0
     ) {
       setMainModalText("noStudentInHomework");
       setSubModalText("noStudentInHomework");
       setModalShow(true);
     }
   });
-
   return (
     <div className="build-homework">
       <div className="nav-btn--container">
@@ -142,10 +148,11 @@ const BuildHomework = ({
           <div className="homeworkForm__student">
             <p className="homeworkForm__student__title">학생</p>
             <div className="homeworkForm__student__names">
-              {student.map((info, i) => (
+              {getLessonDayStu().map((info, i) => (
                 <div
                   className={
-                    homeworkStudentObj.homeworkStudent == info.name
+                    homeworkStudentObj.homeworkStudent == info.name ||
+                    getLessonDayStu().length == 1
                       ? `homework-form__student-name ${info.color} student-name--selected`
                       : `homework-form__student-name ${info.color} `
                   }
@@ -160,24 +167,20 @@ const BuildHomework = ({
           <div className="contentLine"></div>
           <div className="homeworkForm__date">
             <p className="homeworkForm__date__title">날짜</p>
-            <input
-              className="homeworkForm__date__content"
-              type="date"
-              min="2020-01-01"
-              value={homeworkDateValue}
-              onChange={homeworkDateChg}
-            ></input>
+            <div className="homeworkForm__date__content">
+              {homeworkDateValue}
+            </div>
           </div>
           <div className="contentLine"></div>
           <div className="homeworkForm__homework">
             <p className="homeworkForm__homework__title">숙제</p>
-            <input
+            <textarea
               className="homeworkForm__homework__content"
               type="textarea"
               placeholder="단어 Day 1 ~ 2"
               value={homeworkInputValue}
               onChange={homeworkInputTextChg}
-            ></input>
+            ></textarea>
           </div>
           <div className="contentLine"></div>
         </div>

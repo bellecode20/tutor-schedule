@@ -60,16 +60,6 @@ const DetailedProfile = ({ student, setStudent, HomeRoundedIcon }) => {
         ></BiHome>
       </div>
       <div className="profiles__main">
-        <div>
-          <div
-            className="profiles__deleteBtn"
-            onClick={() => {
-              onDeleteMode();
-            }}
-          >
-            {deleteState ? <h1>완료</h1> : <h1>삭제</h1>}
-          </div>
-        </div>
         <div className="page-title">상세 프로필</div>
         <div className="titleLine"></div>
         <div className="studentInfo">

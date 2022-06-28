@@ -61,9 +61,6 @@ $content-padding: 1vh 3vh;
 $font-size--smallest: 1.4rem;
 $font-size--small: 1.6rem;
 $font-size--big: 2rem;
-// $font-size--smallest: 1.5rem;
-// $font-size--small: 1.8rem;
-// $font-size--big: 2.3rem;
 $main-color: #edf2ff;
 $main-color--light: #f5f8ff;
 $main-color--deep: #d3e0ff;
@@ -134,12 +131,15 @@ $page-content-ratio--with-btn: 65vh;
   text-align: center;
 }
 .subject--container-size {
-  min-height: 8vh;
+  padding: 1.5rem 0;
+  min-height: 3rem;
 }
 .subject--container__input {
   @extend .font--basic-content;
   border: none;
-  width: 100%;
+  width: 60%;
+  min-width: 3rem;
+  height: 4rem;
 }
 .titleLine {
   width: 100%;

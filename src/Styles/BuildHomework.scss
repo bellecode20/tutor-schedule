@@ -13,9 +13,11 @@
       @extend .flex-row;
       align-items: center;
       font-size: 2rem;
-      input {
+      input,
+      textarea {
         @extend .subject--container__input;
         font-size: b.$font-size--small;
+        height: 3rem;
       }
       .homeworkForm__student__title,
       .homeworkForm__date__title,
@@ -37,10 +39,17 @@
           border-radius: 3px;
           font-size: b.$font-size--small;
         }
+        .homework-form__student-name:hover {
+          cursor: pointer;
+          filter: brightness(80%);
+        }
         .student-name--selected {
           box-shadow: 0 0 0 3px b.$main-font-color inset;
           @extend .font--small-title;
         }
+      }
+      .homeworkForm__homework__content {
+        height: 10rem;
       }
     }
   }
