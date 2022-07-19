@@ -1,11 +1,9 @@
-import { write } from "fs";
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiHome, BiLeftArrowAlt } from "react-icons/bi";
-import "../Styles/basic.scss";
-import "../Styles/buildProfile.scss";
 import { useNavigate } from "react-router-dom";
 import ErrorModal from "./ErrorModal.js";
+import "../Styles/basic.scss";
+import "../Styles/buildProfile.scss";
 
 const BuildProfile = ({
   student,
@@ -18,265 +16,101 @@ const BuildProfile = ({
   setSubModalText,
 }) => {
   const navigate = useNavigate();
-  //학교 인풋값을 객체로 만든다.
-  const [schoolValue, setSchoolValue] = useState("");
-  let [schoolObj, setSchoolObj] = useState({ school: "" });
-  const schoolChg = (e) => {
-    setSchoolValue(e.target.value);
-  };
-  useEffect(() => setSchoolObj({ school: schoolValue }), [schoolValue]);
-
-  //이름 인풋값을 객체로 만든다.
-  const [nameValue, setNameValue] = useState("");
-  let [nameObj, setNameObj] = useState({ name: "" });
-  const nameChg = (e) => {
-    setNameValue(e.target.value);
-  };
-  useEffect(() => setNameObj({ name: nameValue }), [nameValue]);
-
-  //나이 인풋값을 객체로 만든다.
-  const [ageValue, setAgeValue] = useState("");
-  let [ageObj, setAgeObj] = useState({ age: "" });
-  const ageChg = (e) => {
-    setAgeValue(parseInt(e.target.value));
-  };
-  useEffect(() => setAgeObj({ age: ageValue }), [ageValue]);
-
-  //시급 인풋값을 객체로 만든다.
-  const [wageValue, setWageValue] = useState("");
-  let [wageObj, setWageObj] = useState({ wage: "" });
-  const wageChg = (e) => {
-    setWageValue(parseInt(e.target.value));
-  };
-  useEffect(() => setWageObj({ wage: wageValue }), [wageValue]);
-
-  //주 00회 값을 객체로 만든다.
-  const [onWeekValue, setOnWeekValue] = useState("");
-  let [onWeekObj, setOnWeekObj] = useState({ wage: "" });
-  const onWeekChg = (e) => {
-    setOnWeekValue(parseInt(e.target.value));
-  };
-  useEffect(() => setOnWeekObj({ onWeek: onWeekValue }), [onWeekValue]);
-
-  //주에 몇시간인지 값을 객체로 만든다.
-  const [hourValue, setHourValue] = useState("");
-  let [hourObj, setHourObj] = useState({ wage: "" });
-  const hourChg = (e) => {
-    setHourValue(parseInt(e.target.value));
-  };
-  useEffect(() => setHourObj({ hour: hourValue }), [hourValue]);
-
-  //총 몇회인지 값을 객체로 만든다.
-  const [totalNumValue, setTotalNumValue] = useState("");
-  let [totalNumObj, setTotalNumObj] = useState({ wage: "" });
-  const totalNumChg = (e) => {
-    setTotalNumValue(parseInt(e.target.value));
-  };
-  useEffect(() => setTotalNumObj({ totalNum: totalNumValue }), [totalNumValue]);
-
-  //총 월급이 얼마인지 값을 객체로 만든다.
-  const [totalWageValue, setTotalWageValue] = useState("");
-  let [totalWageObj, setTotalWageObj] = useState({ wage: "" });
-  const totalWageChg = (e) => {
-    setTotalWageValue(parseInt(e.target.value));
-  };
-  useEffect(
-    () => setTotalWageObj({ totalWage: totalWageValue }),
-    [totalWageValue]
-  );
-
-  //수업 시작일 값을 객체로 만든다.
-  const [firstDateValue, setFirstDateValue] = useState(
-    `${new Date().toISOString().substring(0, 10)}`
-  );
-
-  let [firstDateObj, setFirstDateObj] = useState({ wage: "" });
-  const firstDateChg = (e) => {
-    setFirstDateValue(e.target.value);
-  };
-  useEffect(
-    () => setFirstDateObj({ firstDate: firstDateValue }),
-    [firstDateValue]
-  );
-
   //요일 map
-  const [dayMapArr, setDayMapArr] = useState([
-    {
-      id: "dayChoice1",
-      value: 1,
-      text: "월",
-    },
-    {
-      id: "dayChoice2",
-      value: 2,
-      text: "화",
-    },
-    {
-      id: "dayChoice3",
-      value: 3,
-      text: "수",
-    },
-    {
-      id: "dayChoice4",
-      value: 4,
-      text: "목",
-    },
-    {
-      id: "dayChoice5",
-      value: 5,
-      text: "금",
-    },
-    {
-      id: "dayChoice6",
-      value: 6,
-      text: "토",
-    },
-    {
-      id: "dayChoice0",
-      value: 0,
-      text: "일",
-    },
-  ]);
-  //요일 값을 객체로 만들 것이다.
-  const [dayValue, setDayValue] = useState([]);
-  let [dayObj, setDayObj] = useState({ days: "" });
-  useEffect(() => setDayObj({ days: dayValue }), [dayValue]);
-
-  //요일 체크박스에 체크된 것들만 모은다.
-  const dayOnClick = (e) => {
-    let checked = e.target.checked;
-    if (checked) {
-      setDayValue([...dayValue, Number(e.target.value)]);
-    } else {
-      setDayValue(dayValue.filter((el) => el != e.target.value));
-    }
-  };
-
-  //색깔 map을 위한 useState을 만든다.
-  const [colorMapArr, setColorMapArr] = useState([
-    {
-      id: "colorChoice0",
-      value: "pinkCoral",
-    },
-    {
-      id: "colorChoice1",
-      value: "lightPink",
-    },
-    {
-      id: "colorChoice2",
-      value: "deepYellow",
-    },
-    {
-      id: "colorChoice3",
-      value: "lightYellow",
-    },
-    {
-      id: "colorChoice4",
-      value: "lightGreen",
-    },
-    {
-      id: "colorChoice5",
-      value: "fluorescentGreen",
-    },
-    {
-      id: "colorChoice6",
-      value: "lightblue",
-    },
-    {
-      id: "colorChoice7",
-      value: "deepblue",
-    },
-    {
-      id: "colorChoice8",
-      value: "pastelPurple",
-    },
-  ]);
-
-  //색깔 값을 객체로 만든다.
-  const [colorObj, setColorObj] = useState({ color: "" });
-  const colorOnClick = (e) => {
-    setColorObj({ color: e.target.value });
-  };
-
-  // 메모 값을 객체로 만든다.
-  const [memoValue, setMemoValue] = useState("");
-  let [memoObj, setMemoObj] = useState({ memo: "" });
-  const memoChg = (e) => {
-    setMemoValue(e.target.value);
-  };
-  useEffect(() => setMemoObj({ memo: memoValue }), [memoValue]);
-
-  // 지금까지 입력한 input객체들을 모두 모아 하나의 객체로 만들어준다.
-  const profileObj = {
-    ...nameObj,
-    ...schoolObj,
-    ...ageObj,
-    ...wageObj,
-    ...onWeekObj,
-    ...hourObj,
-    ...totalNumObj,
-    ...totalWageObj,
-    ...firstDateObj,
-    ...colorObj,
-    ...memoObj,
-    ...dayObj,
-  };
-
+  const colorMapArr = [
+    "pinkCoral",
+    "lightPink",
+    "deepYellow",
+    "lightYellow",
+    "lightGreen",
+    "fluorescentGreen",
+    "lightblue",
+    "deepblue",
+    "pastelPurple",
+  ];
+  const dayMapArr = ["일", "월", "화", "수", "목", "금", "토"];
+  const [allValues, setAllValues] = useState({
+    name: "",
+    wage: "",
+    onWeek: "",
+    hour: "",
+    totalNum: "",
+    firstDate: `${new Date().toISOString().substring(0, 10)}`,
+    days: "",
+    color: "",
+    memo: "",
+  });
   useEffect(() => {
     localStorage.setItem("profilesKey", JSON.stringify(student));
   }, [student]);
 
+  const changeHandler = (e) => {
+    if (e.target.name == "days") {
+      let checked = e.target.checked;
+      let daysNewValue;
+      if (checked) {
+        daysNewValue = [...allValues.days, Number(e.target.value)];
+      } else {
+        daysNewValue = allValues.days.filter((el) => el != e.target.value);
+      }
+      setAllValues({
+        ...allValues,
+        [e.target.name]: daysNewValue,
+      });
+      return;
+    } else if (
+      e.target.name == "hour" ||
+      e.target.name == "wage" ||
+      e.target.name == "onWeek" ||
+      e.target.name == "totalNum"
+    ) {
+      setAllValues({
+        ...allValues,
+        [e.target.name]: parseInt(e.target.value),
+      });
+      return;
+    }
+    setAllValues({ ...allValues, [e.target.name]: e.target.value });
+  };
+
   // 저장 버튼을 눌렀을 때, 프로필을 다 작성했다면 실행된다.
   const profileSave = (e) => {
-    const writtenYet =
-      profileObj.name == "" ||
-      profileObj.school == "" ||
-      profileObj.age == "" ||
-      profileObj.wage == "" ||
-      profileObj.onWeek == "" ||
-      profileObj.totalNum == "" ||
-      profileObj.totalWage == "" ||
-      profileObj.firstDate == "" ||
-      profileObj.colorObj == "" ||
-      profileObj.dayObj == "";
-
+    const writtenYet = () => {
+      for (let x in allValues) {
+        // 모두 작성하지 않았다면 writtenYet이 true임을 반환한다.
+        if (x == "memo") continue; // memo는 작성하지 않아도 된다.
+        if (allValues[x] == "") return true;
+      }
+      return false;
+    };
     //프로필을 다 작성하지 않았을 때 혹은 이름이 중복될때 저장하지 않고 모달창을 띄운다.
-    const 프로필배열 = JSON.parse(localStorage.getItem("profilesKey"));
+    const existedProfiles = JSON.parse(localStorage.getItem("profilesKey"));
     if (
-      profileObj.name != "" &&
-      프로필배열.filter((el) => el.name == profileObj.name).length >= 1
+      allValues.name != "" &&
+      existedProfiles.filter((el) => el.name == allValues.name).length >= 1
     ) {
       e.preventDefault();
+      setModalShow(true);
       setMainModalText("sameName");
       setSubModalText("sameName");
-      setModalShow(true);
-    } else if (writtenYet) {
+    } else if (writtenYet()) {
       e.preventDefault();
+      setModalShow(true);
       setMainModalText("writtenYet");
       setSubModalText("writtenYet");
-      setModalShow(true);
-    } else if (!writtenYet) {
+    } else if (!writtenYet()) {
       //profileObj에 id를 추가한다.
       const id = { id: new Date().valueOf() };
-      const profileObjWithId = { ...profileObj, ...id };
+      const profileObjWithId = { ...allValues, ...id };
       //id까지 추가된 profileObj로 student바꾸기
       setStudent([...student, profileObjWithId]);
+      setModalShow(true);
       setMainModalText("successSaving");
       setSubModalText("successSaving");
-      setModalShow(true);
     }
   };
   const profileSubmit = (e) => {
     e.preventDefault();
-    setSchoolValue("");
-    setNameValue("");
-    setAgeValue("");
-    setOnWeekValue("");
-    setHourValue("");
-    setTotalNumValue("");
-    setTotalWageValue("");
-    setFirstDateValue("");
-    setMemoValue("");
   };
 
   return (
@@ -301,31 +135,9 @@ const BuildProfile = ({
               <input
                 className="studentInfo__name__content"
                 type="text"
+                name="name"
                 placeholder="이수민"
-                value={nameValue}
-                onChange={nameChg}
-              ></input>
-            </div>
-            <div className="contentLine"></div>
-            <div className="studentInfo__school">
-              <p className="studentInfo__school__title">학교</p>
-              <input
-                className="studentInfo__school__content"
-                type="text"
-                placeholder="한국고등학교"
-                value={schoolValue}
-                onChange={schoolChg}
-              ></input>
-            </div>
-            <div className="contentLine"></div>
-            <div className="studentInfo__age">
-              <p className="studentInfo__age__title">나이</p>
-              <input
-                className="studentInfo__age__content"
-                type="number"
-                placeholder="17"
-                value={ageValue}
-                onChange={ageChg}
+                onChange={changeHandler}
               ></input>
             </div>
             <div className="contentLine"></div>
@@ -337,9 +149,9 @@ const BuildProfile = ({
                     <span className="studentInfo__highlight">시급</span>
                     <input
                       type="number"
+                      name="wage"
                       placeholder="2"
-                      value={wageValue}
-                      onChange={wageChg}
+                      onChange={changeHandler}
                     ></input>
                     만원
                   </div>
@@ -349,9 +161,9 @@ const BuildProfile = ({
                       <span className="studentInfo__margin">
                         <input
                           type="number"
+                          name="hour"
                           placeholder="2"
-                          value={hourValue}
-                          onChange={hourChg}
+                          onChange={changeHandler}
                         ></input>
                         시간씩
                       </span>
@@ -360,9 +172,9 @@ const BuildProfile = ({
                       주
                       <input
                         type="number"
+                        name="onWeek"
                         placeholder="2"
-                        value={onWeekValue}
-                        onChange={onWeekChg}
+                        onChange={changeHandler}
                       ></input>
                       회
                     </div>
@@ -374,21 +186,12 @@ const BuildProfile = ({
                     <span className="studentInfo__margin">
                       <input
                         type="number"
+                        name="totalNum"
                         placeholder="8"
-                        value={totalNumValue}
-                        onChange={totalNumChg}
+                        onChange={changeHandler}
                       ></input>
                       회
                     </span>
-                  </div>
-                  <div className="studentInfo__wage__p">
-                    <input
-                      type="number"
-                      placeholder="32"
-                      value={totalWageValue}
-                      onChange={totalWageChg}
-                    ></input>
-                    만원
                   </div>
                 </div>
               </div>
@@ -399,8 +202,9 @@ const BuildProfile = ({
               <input
                 className="studentInfo__first-date__content"
                 type="date"
-                value={firstDateValue}
-                onChange={firstDateChg}
+                name="firstDate"
+                value={allValues.firstDate}
+                onChange={changeHandler}
               ></input>
             </div>
             <div className="contentLine"></div>
@@ -411,20 +215,20 @@ const BuildProfile = ({
                   <div key={i}>
                     <input
                       type="checkbox"
-                      id={el.id}
-                      name="daysInput"
-                      value={el.value}
-                      onClick={dayOnClick}
+                      name="days"
+                      id={`dayChoice${i}`}
+                      value={i}
+                      onClick={changeHandler}
                     ></input>
-                    <label htmlFor={el.id}>
+                    <label htmlFor={`dayChoice${i}`}>
                       <div
                         className={
-                          dayValue.includes(el.value)
+                          allValues.days.includes(i)
                             ? "dayLabel__Div dayChecked"
                             : "dayLabel__Div"
                         }
                       >
-                        {el.text}
+                        {el}
                       </div>
                     </label>
                   </div>
@@ -440,17 +244,17 @@ const BuildProfile = ({
                     <input
                       type="radio"
                       className="colorInput"
-                      id={el.id}
-                      name="daysInput"
-                      value={el.value}
-                      onClick={colorOnClick}
+                      name="color"
+                      id={`colorChoice${i}`}
+                      value={el}
+                      onClick={changeHandler}
                     ></input>
-                    <label className="colorLabel" htmlFor={el.id}>
+                    <label className="colorLabel" htmlFor={`colorChoice${i}`}>
                       <div
                         className={
-                          colorObj.color == el.value
-                            ? `colorLabelDiv ${el.value} colorLabelDarker`
-                            : `colorLabelDiv ${el.value}`
+                          allValues.color == el
+                            ? `colorLabelDiv ${el} colorLabelDarker`
+                            : `colorLabelDiv ${el}`
                         }
                       ></div>
                     </label>
@@ -464,9 +268,9 @@ const BuildProfile = ({
               <input
                 className="studentInfo__memo__content"
                 type="text"
+                name="memo"
                 placeholder="특이사항"
-                value={memoValue}
-                onChange={memoChg}
+                onChange={changeHandler}
               ></input>
             </div>
             <div className="contentLine"></div>

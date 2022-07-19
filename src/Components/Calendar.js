@@ -190,7 +190,7 @@ const Calendar = ({ student, homework, setHomework }) => {
   };
   return (
     <div className="calendar">
-      <div onClick={showMenu} className="calendar__show-menu-btn nav-btn">
+      <div onClick={showMenu} className="calendar__show-menu-btn">
         <BiMenu className=""></BiMenu>
       </div>
       {displayMenu && (
@@ -287,7 +287,7 @@ const Calendar = ({ student, homework, setHomework }) => {
         className="link--remove-style"
       >
         <div className="calendar__add-hwmk-btn">
-          <BiPlus className="calendar__add-hwmk-btn__icon nav-btn"></BiPlus>
+          <BiPlus className="calendar__add-hwmk-btn__icon"></BiPlus>
         </div>
       </Link>
     </div>

@@ -14,8 +14,17 @@
   @extend .flex-column;
   .calendar__show-menu-btn {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 2rem;
+    left: 2rem;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .calendar__show-menu-btn:hover {
+    cursor: pointer;
   }
   .calendar__menu {
     z-index: 100;
@@ -117,14 +126,15 @@
   }
   .calendar__add-hwmk-btn {
     position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    background-color: b.$main-color--light;
-    // width: 5rem;
-    // height: 5rem;
-    // display: flex;
-    // // justify-content: center;
-    // // align-items: center;
+    bottom: 7vh;
+    right: 10vw;
+    background-color: b.$main-color--deep;
+    border-radius: 10px;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     // // flex-direction: column;
     // font-size: 1rem;
   }

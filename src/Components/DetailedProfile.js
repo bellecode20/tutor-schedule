@@ -69,16 +69,6 @@ const DetailedProfile = ({ student, setStudent, HomeRoundedIcon }) => {
               {detailedStudent.name}
             </div>
             <div className="contentLine"></div>
-            <div className="studentInfo__school">
-              <p className="studentInfo__school__title">학교</p>
-              {detailedStudent.school}
-            </div>
-            <div className="contentLine"></div>
-            <div className="studentInfo__age">
-              <p className="studentInfo__age__title">나이</p>
-              {detailedStudent.age}
-            </div>
-            <div className="contentLine"></div>
             <div className="studentInfo__wage">
               <p className="studentInfo__wage__title">수업료</p>
               <div className="studentInfo__wage__content">
@@ -113,10 +103,6 @@ const DetailedProfile = ({ student, setStudent, HomeRoundedIcon }) => {
                     <span className="studentInfo__padding">
                       {detailedStudent.totalNum}회
                     </span>
-                  </div>
-                  <div className="studentInfo__wage__p">
-                    {detailedStudent.totalWage}
-                    만원
                   </div>
                 </div>
               </div>

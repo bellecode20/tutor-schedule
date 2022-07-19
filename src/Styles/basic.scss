@@ -196,20 +196,23 @@ $page-content-ratio--with-btn: 65vh;
 //Modal
 .modal__overlay {
   background-color: rgba(0, 0, 0, 0.212);
-  width: 100vw;
-  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   bottom: 0;
+  right: 0;
 }
 .modal__content {
   position: absolute;
-  top: 30vh;
+  top: 50%;
   left: 50%;
-  width: 70vw;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%);
+  background: white;
+  max-height: 100vh;
+  position: fixed;
+  background: white;
+  width: 80%;
+  height: auto;
   background-color: white;
   border-radius: 5px;
   font-size: $font-size--small;
