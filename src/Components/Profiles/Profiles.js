@@ -6,10 +6,12 @@ import {
   BiCheckCircle,
 } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import "../Styles/basic.scss";
-import "../Styles/Profiles.scss";
+import { useSelector } from "react-redux";
+import "../../Styles/basic.scss";
+import "../../Styles/Profiles.scss";
 
-const Profiles = ({ student, setStudent, modalShow }) => {
+const Profiles = ({ student, setStudent }) => {
+  const isShown = useSelector((state) => state.modal.isShown);
   const navigate = useNavigate();
   const [deleteState, setDeleteState] = useState(false);
   const [selectedDays, setSelectedDays] = useState([]);
@@ -50,7 +52,7 @@ const Profiles = ({ student, setStudent, modalShow }) => {
     let daysAfterDelete = student.filter(
       (info) => !selectedDays.includes(info)
     );
-    if (deleteState == true && modalShow == false) {
+    if (deleteState == true && isShown == false) {
       setStudent(daysAfterDelete);
     }
   };

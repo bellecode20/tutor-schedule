@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import "../Styles/basic.scss";
-import "../Styles/Profiles.scss";
-// import { Button } from "@material-ui/core";
+import "../../Styles/basic.scss";
+import "../../Styles/Profiles.scss";
 import { BiHome, BiLeftArrowAlt } from "react-icons/bi";
 import { useParams, useNavigate } from "react-router-dom";
 
-const DetailedProfile = ({ student, setStudent, HomeRoundedIcon }) => {
+const DetailedProfile = ({ student, setStudent }) => {
   const navigate = useNavigate();
   const studentInfoMap = student.map((info, i) => (
     <div key={i} className={`${info.color} profiles__profile`}>

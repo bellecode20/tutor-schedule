@@ -1,118 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { BiHome, BiLeftArrowAlt } from "react-icons/bi";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import ErrorModal from "./ErrorModal.js";
-import "../Styles/basic.scss";
-import "../Styles/buildProfile.scss";
-
-const BuildProfile = ({
-  student,
-  setStudent,
-  modalShow,
-  setModalShow,
-  mainModalText,
-  setMainModalText,
-  subModalText,
-  setSubModalText,
+import { BiHome, BiLeftArrowAlt } from "react-icons/bi";
+import "../../Styles/tutorial.module.scss";
+import "../../Styles/profileForm.scss";
+const ProfileForm = ({
+  changeHandler,
+  profileSubmit,
+  profileSave,
+  colorMapArr,
+  dayMapArr,
+  allValues,
 }) => {
   const navigate = useNavigate();
-  //요일 map
-  const colorMapArr = [
-    "pinkCoral",
-    "lightPink",
-    "deepYellow",
-    "lightYellow",
-    "lightGreen",
-    "fluorescentGreen",
-    "lightblue",
-    "deepblue",
-    "pastelPurple",
-  ];
-  const dayMapArr = ["일", "월", "화", "수", "목", "금", "토"];
-  const [allValues, setAllValues] = useState({
-    name: "",
-    wage: "",
-    onWeek: "",
-    hour: "",
-    totalNum: "",
-    firstDate: `${new Date().toISOString().substring(0, 10)}`,
-    days: "",
-    color: "",
-    memo: "",
-  });
-  useEffect(() => {
-    localStorage.setItem("profilesKey", JSON.stringify(student));
-  }, [student]);
-
-  const changeHandler = (e) => {
-    if (e.target.name == "days") {
-      let checked = e.target.checked;
-      let daysNewValue;
-      if (checked) {
-        daysNewValue = [...allValues.days, Number(e.target.value)];
-      } else {
-        daysNewValue = allValues.days.filter((el) => el != e.target.value);
-      }
-      setAllValues({
-        ...allValues,
-        [e.target.name]: daysNewValue,
-      });
-      return;
-    } else if (
-      e.target.name == "hour" ||
-      e.target.name == "wage" ||
-      e.target.name == "onWeek" ||
-      e.target.name == "totalNum"
-    ) {
-      setAllValues({
-        ...allValues,
-        [e.target.name]: parseInt(e.target.value),
-      });
-      return;
-    }
-    setAllValues({ ...allValues, [e.target.name]: e.target.value });
-  };
-
-  // 저장 버튼을 눌렀을 때, 프로필을 다 작성했다면 실행된다.
-  const profileSave = (e) => {
-    const writtenYet = () => {
-      for (let x in allValues) {
-        // 모두 작성하지 않았다면 writtenYet이 true임을 반환한다.
-        if (x == "memo") continue; // memo는 작성하지 않아도 된다.
-        if (allValues[x] == "") return true;
-      }
-      return false;
-    };
-    //프로필을 다 작성하지 않았을 때 혹은 이름이 중복될때 저장하지 않고 모달창을 띄운다.
-    const existedProfiles = JSON.parse(localStorage.getItem("profilesKey"));
-    if (
-      allValues.name != "" &&
-      existedProfiles.filter((el) => el.name == allValues.name).length >= 1
-    ) {
-      e.preventDefault();
-      setModalShow(true);
-      setMainModalText("sameName");
-      setSubModalText("sameName");
-    } else if (writtenYet()) {
-      e.preventDefault();
-      setModalShow(true);
-      setMainModalText("writtenYet");
-      setSubModalText("writtenYet");
-    } else if (!writtenYet()) {
-      //profileObj에 id를 추가한다.
-      const id = { id: new Date().valueOf() };
-      const profileObjWithId = { ...allValues, ...id };
-      //id까지 추가된 profileObj로 student바꾸기
-      setStudent([...student, profileObjWithId]);
-      setModalShow(true);
-      setMainModalText("successSaving");
-      setSubModalText("successSaving");
-    }
-  };
-  const profileSubmit = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <div className="build-profile">
       <div className="nav-btn--container">
@@ -227,9 +126,7 @@ const BuildProfile = ({
                             ? "dayLabel__Div dayChecked"
                             : "dayLabel__Div"
                         }
-                      >
-                        {el}
-                      </div>
+                      ></div>
                     </label>
                   </div>
                 ))}
@@ -246,15 +143,15 @@ const BuildProfile = ({
                       className="colorInput"
                       name="color"
                       id={`colorChoice${i}`}
-                      value={el}
+                      value={el.value}
                       onClick={changeHandler}
                     ></input>
                     <label className="colorLabel" htmlFor={`colorChoice${i}`}>
                       <div
                         className={
-                          allValues.color == el
-                            ? `colorLabelDiv ${el} colorLabelDarker`
-                            : `colorLabelDiv ${el}`
+                          allValues.color == el.value
+                            ? `colorLabelDiv ${el.value} colorLabelDarker`
+                            : `colorLabelDiv ${el.value}`
                         }
                       ></div>
                     </label>
@@ -280,15 +177,7 @@ const BuildProfile = ({
           저장
         </button>
       </form>
-      {modalShow ? (
-        <ErrorModal
-          modalShow={modalShow}
-          setModalShow={setModalShow}
-          mainModalText={mainModalText}
-          subModalText={subModalText}
-        />
-      ) : null}
     </div>
   );
 };
-export default BuildProfile;
+export default ProfileForm;

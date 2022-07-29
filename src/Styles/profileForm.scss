@@ -123,22 +123,22 @@
       .colorInput {
         display: none;
       }
-      .colorLabelDiv {
-        min-height: auto;
-        height: 2rem;
-        width: 2rem;
-        margin-right: 5px;
-        border-radius: 3px;
-        cursor: pointer;
-      }
-      label:hover {
-        .colorLabelDiv {
-          filter: brightness(80%);
-        }
-      }
-      .colorLabelDarker {
-        border: 3px solid rgb(131, 131, 131);
-      }
     }
   }
+}
+.colorLabelDiv {
+  min-height: auto;
+  height: 2rem;
+  width: 2rem;
+  margin-right: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+label:hover {
+  .colorLabelDiv {
+    filter: brightness(80%);
+  }
+}
+.colorLabelDarker {
+  border: 3px solid rgb(131, 131, 131);
 }

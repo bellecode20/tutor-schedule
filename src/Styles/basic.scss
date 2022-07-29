@@ -54,18 +54,26 @@
   font-weight: 900;
   font-style: normal;
 }
+
+//color
 $coral: #e97b6e;
 $gray: #f2f2f2;
-$deep-gray: #dadada;
-$content-padding: 1vh 3vh;
-$font-size--smallest: 1.4rem;
-$font-size--small: 1.6rem;
-$font-size--big: 2rem;
+$deep-gray: #d2d2d7;
+$main-blue--light: #71b3fc;
+$main-blue: #0071e3;
 $main-color: #edf2ff;
 $main-color--light: #f5f8ff;
 $main-color--deep: #d3e0ff;
-$main-font-color: #212121;
+$main-font-color: #1e1e21;
 $sub-font-color--gray: rgb(59, 59, 59);
+
+//font
+$font-size--smallest: 1.4rem;
+$font-size--small: 1.6rem;
+$font-size--big: 2rem;
+
+//layout
+$content-padding: 1vh 3vh;
 $page-content-ratio--without-btn: 75vh;
 $page-content-ratio--with-btn: 65vh;
 .nav-btns--left {
@@ -193,100 +201,10 @@ $page-content-ratio--with-btn: 65vh;
   text-decoration: none;
   color: $main-font-color;
 }
-//Modal
-.modal__overlay {
-  background-color: rgba(0, 0, 0, 0.212);
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-.modal__content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  max-height: 100vh;
-  position: fixed;
-  background: white;
-  width: 80%;
-  height: auto;
-  background-color: white;
-  border-radius: 5px;
-  font-size: $font-size--small;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 17rem 5rem 10rem 5rem;
-  align-items: center;
-  justify-items: center;
-  .modal__content__icon-wrap {
-    grid-column: 1/3;
-    grid-row: 1/2;
-    padding-top: 5rem;
-    .modal__content__icon {
-      color: #aec0ec;
-      height: 10rem;
-    }
-  }
-  .modal__text--main {
-    @extend .font--small-title;
-    font-size: $font-size--big;
-    grid-column: 1/3;
-    grid-row: 2/3;
-    align-self: end;
-  }
-  .modal__text--sub {
-    font-size: $font-size--smallest;
-    padding: $content-padding;
-    line-height: $font-size--small;
-    grid-column: 1/3;
-    grid-row: 3/4;
-    text-align: center;
-  }
-  .modal__do-btn {
-    @extend .font--small-title;
-    grid-column: 2/3;
-    grid-row: 4/5;
-    cursor: pointer;
-    background-color: $main-color;
-    justify-self: stretch;
-    align-self: stretch;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .modal__cancel-btn {
-    grid-column: 1/2;
-    grid-row: 4/5;
-    cursor: pointer;
-    justify-self: stretch;
-    align-self: stretch;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $gray;
-  }
-}
-.modal__okBtn {
-  grid-column: 1/3;
-  grid-row: 4/5;
-  cursor: pointer;
-  justify-self: stretch;
-  align-self: stretch;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $main-color;
-}
-.modal__cancel-btn:hover {
-  background-color: $deep-gray;
-}
-.modal__do-btn:hover,
-.modal__okBtn:hover {
-  background-color: $main-color--deep;
-}
-.modal__text {
-  font-size: 2rem;
+//input
+// 숫자 타입 인풋에서 화살표 안보이게 설정했다.
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { BiHome, BiLeftArrowAlt, BiErrorCircle } from "react-icons/bi";
-import ErrorModal from "./ErrorModal.js";
+import { useParams, useNavigate } from "react-router-dom";
+import { BiHome, BiLeftArrowAlt } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { toggleShowing, changeId } from "../features/modalSlice.js";
 import "../Styles/BuildHomework.scss";
-const BuildHomework = ({
-  student,
-  homework,
-  setHomework,
-  modalShow,
-  setModalShow,
-  mainModalText,
-  setMainModalText,
-  subModalText,
-  setSubModalText,
-}) => {
+const BuildHomework = ({ student, homework, setHomework }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { clickedDate } = useParams();
   const [homeworkInfoObj, sethomeworkInfoObj] = useState();
@@ -80,9 +72,8 @@ const BuildHomework = ({
       homeworkInputObj.homeworkInput == "";
     if (existHomework.length > 0) {
       e.preventDefault();
-      setMainModalText("existHomework");
-      setSubModalText("existHomework");
-      setModalShow(true);
+      dispatch(toggleShowing());
+      dispatch(changeId("existHomework"));
     } else if (!writtenYet) {
       const id = { id: new Date().valueOf() };
       //student에서 동일한 학생 이름을 찾아서, 그 때 고른 color 값으로 추가한다.
@@ -97,14 +88,12 @@ const BuildHomework = ({
         ...colorObj,
         ...id,
       });
-      setMainModalText("successSaving");
-      setSubModalText("successSaving");
-      setModalShow(true);
+      dispatch(toggleShowing());
+      dispatch(changeId("successSaving"));
     } else {
       e.preventDefault();
-      setMainModalText("writtenYet");
-      setSubModalText("writtenYet");
-      setModalShow(true);
+      dispatch(toggleShowing());
+      dispatch(changeId("writtenYet"));
     }
   };
 
@@ -124,11 +113,10 @@ const BuildHomework = ({
       JSON.parse(localStorage.getItem("profilesKey")).length == 0 ||
       getLessonDayStu().length == 0
     ) {
-      setMainModalText("noStudentInHomework");
-      setSubModalText("noStudentInHomework");
-      setModalShow(true);
+      dispatch(toggleShowing());
+      dispatch(changeId("noStudentInHomework"));
     }
-  });
+  }, []);
   return (
     <div className="build-homework">
       <div className="nav-btn--container">
@@ -188,14 +176,6 @@ const BuildHomework = ({
           저장
         </button>
       </form>
-      {modalShow && (
-        <ErrorModal
-          modalShow={modalShow}
-          setModalShow={setModalShow}
-          mainModalText={mainModalText}
-          subModalText={subModalText}
-        />
-      )}
     </div>
   );
 };
