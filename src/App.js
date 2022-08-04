@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Calendar from "./Components/Calendar.js";
@@ -8,22 +8,22 @@ import Profiles from "./Components/Profiles/Profiles";
 import DetailedProfile from "./Components/Profiles/DetailedProfile";
 import NotFound from "./Components/NotFound";
 import Modal from "./Components/Modal";
+import { setProfilesKey } from "./features/profilesSlice.js";
 import "./Styles/reset.scss";
 import "./App.scss";
 import "./Styles/_mediaQuery.scss";
 function App() {
   const dispatch = useDispatch();
   const isShown = useSelector((state) => state.modal.isShown);
-  const [student, setStudent] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = window.localStorage.getItem("profilesKey");
-      if (saved !== null) {
-        return JSON.parse(saved);
-      } else {
-        return [];
-      }
+  if (typeof window !== "undefined") {
+    // LS에서 직접 모든 데이터를 삭제하면 profiles 리덕스 스토어도 null이 된다.
+    // null 데이터를 렌더링하면 문제가 생기므로 []로 값을 설정해준다.
+    const saved = window.localStorage.getItem("profilesKey");
+    if (saved == null) {
+      window.localStorage.setItem("profilesKey", JSON.stringify([]));
+      dispatch(setProfilesKey([]));
     }
-  });
+  }
   const [homeworkInfo, setHomeworkInfo] = useState(() => {
     if (typeof window !== "undefined") {
       const saved = window.localStorage.getItem("homeworksKey");
@@ -40,18 +40,13 @@ function App() {
         <Route
           path={process.env.REACT_APP_PATH}
           element={
-            <Calendar
-              student={student}
-              homework={homeworkInfo}
-              setHomework={setHomeworkInfo}
-            />
+            <Calendar homework={homeworkInfo} setHomework={setHomeworkInfo} />
           }
         ></Route>
         <Route
           path={`${process.env.REACT_APP_PATH}/homeworkview/:clickedDate`}
           element={
             <BuildHomework
-              student={student}
               homework={homeworkInfo}
               setHomework={setHomeworkInfo}
             ></BuildHomework>
@@ -59,27 +54,15 @@ function App() {
         ></Route>
         <Route
           path={`${process.env.REACT_APP_PATH}/buildprofile`}
-          element={
-            <BuildProfile
-              student={student}
-              setStudent={setStudent}
-            ></BuildProfile>
-          }
+          element={<BuildProfile></BuildProfile>}
         ></Route>
         <Route
           path={`${process.env.REACT_APP_PATH}/profiles`}
-          element={
-            <Profiles student={student} setStudent={setStudent}></Profiles>
-          }
+          element={<Profiles></Profiles>}
         ></Route>
         <Route
           path={`${process.env.REACT_APP_PATH}/profiles/:profileIdInUrl`}
-          element={
-            <DetailedProfile
-              student={student}
-              setStudent={setStudent}
-            ></DetailedProfile>
-          }
+          element={<DetailedProfile></DetailedProfile>}
         ></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>

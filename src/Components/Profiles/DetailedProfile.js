@@ -1,51 +1,15 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import "../../Styles/basic.scss";
-import "../../Styles/Profiles.scss";
+import React from "react";
+import { useSelector } from "react-redux";
 import { BiHome, BiLeftArrowAlt } from "react-icons/bi";
 import { useParams, useNavigate } from "react-router-dom";
-
-const DetailedProfile = ({ student, setStudent }) => {
+import "../../Styles/basic.scss";
+import "../../Styles/Profiles.scss";
+const DetailedProfile = () => {
+  let profilesKey = useSelector((state) => state.profiles.profiles);
   const navigate = useNavigate();
-  const studentInfoMap = student.map((info, i) => (
-    <div key={i} className={`${info.color} profiles__profile`}>
-      <p className="profiles__profile__name">{info.name}</p>
-      <div
-        className="propfiles__profile__deleteBtn"
-        onClick={() => {
-          profileOnClick(info);
-        }}
-      >
-        X
-      </div>
-    </div>
-  ));
-  let [deleteState, setDeleteState] = useState(false);
-  let [selectedDays, setSelectedDays] = useState([]);
-
-  const onDeleteMode = () => {
-    setDeleteState(!deleteState);
-    if (deleteState == true) {
-      let daysAfterDelete = student.filter(
-        (info) => !selectedDays.includes(info)
-      );
-      setStudent(daysAfterDelete);
-    }
-  };
-  useEffect(() => {
-    localStorage.setItem("profilesKey", JSON.stringify(student));
-  }, [student]);
-
-  const profileOnClick = (info) => {
-    if (deleteState == true) {
-      setSelectedDays([...selectedDays, info]);
-    }
-  };
-
-  //시작
   const { profileIdInUrl } = useParams();
   const profileId = profileIdInUrl.slice(1);
-  const detailedStudent = student.find((el) => el.id == profileId);
+  const detailedStudent = profilesKey.find((el) => el.id == profileId);
   return (
     <div className="Profiles">
       <div className="nav-btn--container">

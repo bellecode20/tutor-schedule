@@ -1,16 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  profiles: [],
+  profiles: JSON.parse(localStorage.getItem("profilesKey")),
 };
 export const profilesSlice = createSlice({
   name: "profiles",
   initialState,
   reducers: {
-    setProfiles: (state, action) => {
+    setProfilesKey: (state, action) => {
       state.profiles = action.payload;
+    },
+    setProfilesLS: (state) => {
+      localStorage.setItem("profilesKey", JSON.stringify(state.profiles));
     },
   },
 });
 
-export const { setProfiles } = profilesSlice.actions;
+export const { setProfilesKey, setProfilesLS } = profilesSlice.actions;
 export default profilesSlice.reducer;

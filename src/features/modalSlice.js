@@ -31,7 +31,7 @@ const initialState = {
       id: "noStudentInHomework",
       mode: "Error",
       mainText: "앗...",
-      subText: "오늘은 수업이 없어요",
+      subText: "학생이 없어요",
       buttonType: "two",
       buttonLinks: [
         process.env.REACT_APP_PATH,

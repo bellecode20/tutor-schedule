@@ -1,16 +1,23 @@
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { BiX, BiTrash, BiPlus } from "react-icons/bi";
+import { useSelector, useDispatch } from "react-redux";
+import { setProfilesKey, setProfilesLS } from "../features/profilesSlice";
 import "../Styles/HomeworksByDate.scss";
 import "../Styles/basic.scss";
 import "../Styles/calendar.scss";
-import React from "react";
-import { Link } from "react-router-dom";
-const HomeworksByDate = ({
-  selectedDate,
-  homework,
-  deleteHomework,
-  closeHomeworks,
-  lessonStudentArr,
-}) => {
+const HomeworksByDate = ({ homework, setHomework, closeHomeworks }) => {
+  const dispatch = useDispatch();
+  const calendar = useSelector((state) => state.calendar.calendar);
+  const profilesKey = useSelector((state) => state.profiles.profiles);
+  const clickedDate = useSelector((state) => state.clickedDate.date);
+  const getStuHavingLesson = () => {
+    // 클릭한 날에 수업이 있는 학생들을 배열로 리턴한다.
+    return calendar.reduce((acc, cur) => {
+      if (cur.fullDate === clickedDate) return cur.students;
+      return acc;
+    }, []);
+  };
   const hasHomework = (student) => {
     let content = "";
     let thisHomework = getHomework(student);
@@ -20,7 +27,7 @@ const HomeworksByDate = ({
   const getHomework = (student) => {
     for (let h = 0; h < homework.length; h++) {
       if (student.name == homework[h].homeworkStudent) {
-        if (selectedDate == homework[h].homeworkDate) {
+        if (clickedDate == homework[h].homeworkDate) {
           return homework[h];
         }
       }
@@ -28,6 +35,30 @@ const HomeworksByDate = ({
     // 해당하는 숙제가 없으면 무의미한 값을 리턴한다.
     return 0;
   };
+  const deleteHomework = (info) => {
+    const getHomeworks = JSON.parse(localStorage.getItem("homeworksKey"));
+    const afterDelete = getHomeworks.filter((el) => el.id != info.id);
+    const deleteExtraLesson = (info) => {
+      let allStu = JSON.parse(localStorage.getItem("profilesKey"));
+      const newAllStu = allStu.map((stu) => {
+        if (stu.extraLesson.includes(info.homeworkDate)) {
+          let updatedExtra = stu.extraLesson.filter(
+            (el) => el != info.homeworkDate
+          );
+          stu.extraLesson = updatedExtra;
+        }
+        return stu;
+      });
+      dispatch(setProfilesKey(newAllStu));
+      dispatch(setProfilesLS());
+    };
+    deleteExtraLesson(info);
+    setHomework(afterDelete);
+  };
+  useEffect(() => {
+    localStorage.setItem("homeworksKey", JSON.stringify(homework));
+  }, [homework]);
+
   return (
     <div className="calendar__homework-lists">
       <div
@@ -36,9 +67,9 @@ const HomeworksByDate = ({
       >
         <BiX></BiX>
       </div>
-      <div className="calendar__homework-lists__date">{selectedDate}</div>
+      <div className="calendar__homework-lists__date">{clickedDate}</div>
       <div className="calendar__homework-lists__all-students">
-        {lessonStudentArr.map((stu, studentIndex) => {
+        {getStuHavingLesson().map((stu, studentIndex) => {
           return (
             <div key={studentIndex} className="calendar__homework-lists__list">
               <div className={`calendar__homework-list__student ${stu.color}`}>
@@ -70,34 +101,16 @@ const HomeworksByDate = ({
           );
         })}
       </div>
-      {lessonStudentArr.length == 0 ? (
-        <div className="calendar__homework-lists__addHmwk">
-          <button>
-            <div>오늘은 수업이 없어요</div>
-          </button>
-        </div>
-      ) : (
-        <div className="calendar__homework-lists__addHmwk">
-          <Link
-            to={`${process.env.REACT_APP_PATH}/homeworkview/:${selectedDate}`}
-            className="link--remove-style"
-          >
-            <button>
-              <BiPlus></BiPlus> 숙제
-            </button>
-          </Link>
-        </div>
-      )}
-      {/* <div className="calendar__homework-lists__addHmwk">
+      <div className="calendar__homework-lists__addHmwk">
         <Link
-          to={`${process.env.REACT_APP_PATH}/homeworkview/:${selectedDate}`}
+          to={`${process.env.REACT_APP_PATH}/homeworkview/${clickedDate}`}
           className="link--remove-style"
         >
           <button>
             <BiPlus></BiPlus> 숙제
           </button>
         </Link>
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   BiHome,
   BiLeftArrowAlt,
@@ -6,11 +6,14 @@ import {
   BiCheckCircle,
 } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setProfilesKey, setProfilesLS } from "../../features/profilesSlice";
 import "../../Styles/basic.scss";
 import "../../Styles/Profiles.scss";
 
-const Profiles = ({ student, setStudent }) => {
+const Profiles = () => {
+  let profilesKey = useSelector((state) => state.profiles.profiles);
+  const dispatch = useDispatch();
   const isShown = useSelector((state) => state.modal.isShown);
   const navigate = useNavigate();
   const [deleteState, setDeleteState] = useState(false);
@@ -26,7 +29,7 @@ const Profiles = ({ student, setStudent }) => {
       return null;
     }
   };
-  const studentInfoMap = student.map((info, i) => (
+  const studentInfoMap = profilesKey.map((info, i) => (
     <Link
       key={i}
       to={`${process.env.REACT_APP_PATH}/profiles/:${info.id}`}
@@ -49,17 +52,14 @@ const Profiles = ({ student, setStudent }) => {
 
   const onDeleteMode = () => {
     setDeleteState(!deleteState);
-    let daysAfterDelete = student.filter(
+    let daysAfterDelete = profilesKey.filter(
       (info) => !selectedDays.includes(info)
     );
     if (deleteState == true && isShown == false) {
-      setStudent(daysAfterDelete);
+      dispatch(setProfilesKey(daysAfterDelete));
+      dispatch(setProfilesLS());
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem("profilesKey", JSON.stringify(student));
-  }, [student]);
 
   const profileOnClick = (info) => {
     if (deleteState == true && selectedDays.includes(info) == false) {
