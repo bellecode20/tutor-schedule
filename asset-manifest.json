@@ -1,29 +1,27 @@
 {
   "files": {
-    "main.css": "/tutor-schedule/static/css/main.401b5056.chunk.css",
-    "main.js": "/tutor-schedule/static/js/main.2403f888.chunk.js",
-    "main.js.map": "/tutor-schedule/static/js/main.2403f888.chunk.js.map",
-    "runtime-main.js": "/tutor-schedule/static/js/runtime-main.241b42d2.js",
-    "runtime-main.js.map": "/tutor-schedule/static/js/runtime-main.241b42d2.js.map",
+    "main.css": "/tutor-schedule/static/css/main.8c3c403e.chunk.css",
+    "main.js": "/tutor-schedule/static/js/main.79426b15.chunk.js",
+    "main.js.map": "/tutor-schedule/static/js/main.79426b15.chunk.js.map",
+    "runtime-main.js": "/tutor-schedule/static/js/runtime-main.aa231737.js",
+    "runtime-main.js.map": "/tutor-schedule/static/js/runtime-main.aa231737.js.map",
     "static/css/2.7fc9bc2b.chunk.css": "/tutor-schedule/static/css/2.7fc9bc2b.chunk.css",
-    "static/js/2.b9b18531.chunk.js": "/tutor-schedule/static/js/2.b9b18531.chunk.js",
-    "static/js/2.b9b18531.chunk.js.map": "/tutor-schedule/static/js/2.b9b18531.chunk.js.map",
-    "static/js/3.f809f38c.chunk.js": "/tutor-schedule/static/js/3.f809f38c.chunk.js",
-    "static/js/3.f809f38c.chunk.js.map": "/tutor-schedule/static/js/3.f809f38c.chunk.js.map",
+    "static/js/2.7258e7ef.chunk.js": "/tutor-schedule/static/js/2.7258e7ef.chunk.js",
+    "static/js/2.7258e7ef.chunk.js.map": "/tutor-schedule/static/js/2.7258e7ef.chunk.js.map",
+    "static/js/3.37a145b8.chunk.js": "/tutor-schedule/static/js/3.37a145b8.chunk.js",
+    "static/js/3.37a145b8.chunk.js.map": "/tutor-schedule/static/js/3.37a145b8.chunk.js.map",
     "index.html": "/tutor-schedule/index.html",
     "service-worker.js": "/tutor-schedule/service-worker.js",
     "service-worker.js.map": "/tutor-schedule/service-worker.js.map",
     "static/css/2.7fc9bc2b.chunk.css.map": "/tutor-schedule/static/css/2.7fc9bc2b.chunk.css.map",
-    "static/css/main.401b5056.chunk.css.map": "/tutor-schedule/static/css/main.401b5056.chunk.css.map",
-    "static/js/2.b9b18531.chunk.js.LICENSE.txt": "/tutor-schedule/static/js/2.b9b18531.chunk.js.LICENSE.txt",
-    "static/media/check.00d9aca7.svg": "/tutor-schedule/static/media/check.00d9aca7.svg",
-    "static/media/error.c3f8d911.svg": "/tutor-schedule/static/media/error.c3f8d911.svg"
+    "static/css/main.8c3c403e.chunk.css.map": "/tutor-schedule/static/css/main.8c3c403e.chunk.css.map",
+    "static/js/2.7258e7ef.chunk.js.LICENSE.txt": "/tutor-schedule/static/js/2.7258e7ef.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.241b42d2.js",
+    "static/js/runtime-main.aa231737.js",
     "static/css/2.7fc9bc2b.chunk.css",
-    "static/js/2.b9b18531.chunk.js",
-    "static/css/main.401b5056.chunk.css",
-    "static/js/main.2403f888.chunk.js"
+    "static/js/2.7258e7ef.chunk.js",
+    "static/css/main.8c3c403e.chunk.css",
+    "static/js/main.79426b15.chunk.js"
   ]
 }
