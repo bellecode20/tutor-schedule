@@ -9,8 +9,8 @@ import "../Styles/calendar.scss";
 const HomeworksByDate = ({ homework, setHomework, closeHomeworks }) => {
   const dispatch = useDispatch();
   const calendar = useSelector((state) => state.calendar.calendar);
-  const profilesKey = useSelector((state) => state.profiles.profiles);
   const clickedDate = useSelector((state) => state.clickedDate.date);
+  const clickedDateArr = clickedDate.split("-").map((el) => Number(el));
   const getStuHavingLesson = () => {
     // 클릭한 날에 수업이 있는 학생들을 배열로 리턴한다.
     return calendar.reduce((acc, cur) => {
@@ -61,13 +61,17 @@ const HomeworksByDate = ({ homework, setHomework, closeHomeworks }) => {
 
   return (
     <div className="calendar__homework-lists">
-      <div
-        className="calendar__homework-lists__close-btn nav-btn"
-        onClick={() => closeHomeworks()}
-      >
-        <BiX></BiX>
+      <div className="homework-lists__top">
+        <div className="calendar__homework-lists__date">
+          {clickedDateArr[1]}월 {clickedDateArr[2]}일
+        </div>
+        <div
+          className="calendar__homework-lists__close-btn nav-btn"
+          onClick={() => closeHomeworks()}
+        >
+          <BiX></BiX>
+        </div>
       </div>
-      <div className="calendar__homework-lists__date">{clickedDate}</div>
       <div className="calendar__homework-lists__all-students">
         {getStuHavingLesson().map((stu, studentIndex) => {
           return (
@@ -100,15 +104,16 @@ const HomeworksByDate = ({ homework, setHomework, closeHomeworks }) => {
             </div>
           );
         })}
+        {getStuHavingLesson().length == 0 && (
+          <p className="text">오늘은 수업이 없어요.</p>
+        )}
       </div>
       <div className="calendar__homework-lists__addHmwk">
         <Link
           to={`${process.env.REACT_APP_PATH}/homeworkview/${clickedDate}`}
-          className="link--remove-style"
+          className="homework-lists__addHmwk-btn"
         >
-          <button>
-            <BiPlus></BiPlus> 숙제
-          </button>
+          숙제내기
         </Link>
       </div>
     </div>

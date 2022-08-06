@@ -1,0 +1,18 @@
+@import "./mediaQuery.scss";
+.whole_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  overflow-y: hidden;
+  .content_container {
+    width: 47rem;
+    height: 80%;
+    border-radius: 1rem;
+    .title {
+      min-width: 15rem;
+      max-width: 10vw;
+    }
+  }
+}

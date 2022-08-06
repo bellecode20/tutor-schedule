@@ -7,65 +7,47 @@
   @include for-tablet-landscape-up {
     padding: 0 20vw;
   }
+  overflow-y: hidden;
 }
 .calendar {
   height: 100vh;
   position: relative;
   @extend .flex-column;
-  .calendar__show-menu-btn {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    width: 8rem;
-    height: 8rem;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .calendar__show-menu-btn:hover {
-    cursor: pointer;
-  }
-  .calendar__menu {
-    z-index: 100;
-    position: fixed;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    padding: 6rem 3rem;
-    background-color: b.$main-color;
-    height: 100vh;
-    width: 70%;
-    max-width: 30rem;
-    @extend .font--small-title;
-    .menu__line {
-      width: 90%;
-      height: 2px;
-      background-color: b.$sub-font-color--gray;
+  .calendar__nav {
+    background-color: #3a3a3a;
+    .calendar__links {
+      @extend .flex-row;
+      margin: 0 15vw;
+      color: white;
+      @include for-tablet-landscape-up {
+        margin: 0 20vw;
+      }
+      .link {
+        justify-self: end;
+        color: #dbdbdb;
+        font-family: "Pretendard-Medium";
+        font-size: 1.4rem;
+        padding: 1.5rem 2rem;
+        margin-left: 1rem;
+      }
+      .link:hover {
+        color: white;
+      }
     }
-    .calendar__menu__close-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      padding: 0.5rem;
-    }
-    .calendar__menu__close-btn:hover {
-      background-color: b.$main-color--deep;
+    .calendar__show-menu-btn {
+      align-self: center;
       border-radius: 50%;
-      padding: 0.5rem;
-    }
-    .calendar__menu__list {
-      padding: 5rem 0 0.5rem 0;
+      color: #dbdbdb;
     }
   }
   .calendarTop {
     @extend .font--title;
     display: flex;
-    justify-content: center;
     height: 20%;
     .calendarTop__this-month {
       @extend .flex-row;
       @extend .flex-center;
+      font-size: 7rem;
     }
     button {
       @extend .flex-row;
@@ -78,10 +60,10 @@
     }
   }
   .calendarBttm {
-    // padding: b.$content-padding;
+    @extend .flex-column;
+    font-family: "Pretendard-Regular";
     font-size: 1.5rem;
     height: 80%;
-    @extend .flex-column;
     .days,
     .dates {
       display: grid;
@@ -97,9 +79,16 @@
       flex-basis: 0;
       flex-grow: 8;
     }
+    .dates__date__date {
+      width: 100%;
+      height: 100%;
+    }
     .dates__date {
-      border-top: 1px solid gray;
+      border-top: 1px solid b.$main-font-color;
+      padding-top: 1rem;
+      color: b.$sub-font-color--gray;
       cursor: pointer;
+
       .dates__studentColors {
         @include for-tablet-landscape-up {
           padding: 1rem 1.5rem;
@@ -120,8 +109,8 @@
         font-size: 1.5rem;
       }
     }
-    .dates__date:hover {
-      background-color: b.$gray;
+    .dates__date__date:hover {
+      transform: scale(1.1);
     }
   }
   .calendar__add-hwmk-btn {
@@ -129,13 +118,15 @@
     bottom: 7vh;
     right: 10vw;
     background-color: b.$main-color--deep;
-    border-radius: 10px;
+    border-radius: 50%;
     width: 5rem;
     height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    // // flex-direction: column;
-    // font-size: 1rem;
+    color: white;
+  }
+  .calendar__add-hwmk-btn:hover {
+    transform: scale(1.1);
   }
 }

@@ -1,6 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { BiHome, BiLeftArrowAlt } from "react-icons/bi";
+import Layout from "../Layout";
 import "../../Styles/tutorial.module.scss";
 import "../../Styles/profileForm.scss";
 const ProfileForm = ({
@@ -11,19 +10,8 @@ const ProfileForm = ({
   dayMapArr,
   allValues,
 }) => {
-  const navigate = useNavigate();
   return (
-    <div className="build-profile">
-      <div className="nav-btn--container">
-        <BiLeftArrowAlt
-          className="nav-btn"
-          onClick={() => navigate(-1)}
-        ></BiLeftArrowAlt>
-        <BiHome
-          className="nav-btn"
-          onClick={() => navigate(process.env.REACT_APP_PATH)}
-        ></BiHome>
-      </div>
+    <Layout>
       <div className="page-title">학생 추가</div>
       <div className="titleLine"></div>
       <form onSubmit={profileSubmit}>
@@ -126,7 +114,9 @@ const ProfileForm = ({
                             ? "dayLabel__Div dayChecked"
                             : "dayLabel__Div"
                         }
-                      ></div>
+                      >
+                        {dayMapArr[i]}
+                      </div>
                     </label>
                   </div>
                 ))}
@@ -177,7 +167,7 @@ const ProfileForm = ({
           저장
         </button>
       </form>
-    </div>
+    </Layout>
   );
 };
 export default ProfileForm;

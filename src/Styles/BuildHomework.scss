@@ -1,60 +1,69 @@
 @use "basic" as b;
-.build-homework {
-  position: relative;
-  .homeworkForm {
-    padding: b.$content-padding;
-    .homeworkForm__student,
-    .homeworkForm__date,
-    .homeworkForm__homework {
-      @extend .subject--container-size;
+.homeworkForm {
+  .homeworkForm__student,
+  .homeworkForm__date,
+  .homeworkForm__homework {
+    @extend .subject--container-size;
+    font-size: b.$font-size--small;
+  }
+  > div {
+    @extend .flex-row;
+    align-items: center;
+    font-size: 2rem;
+    width: 47rem;
+    input,
+    textarea {
+      @extend .subject--container__input;
       font-size: b.$font-size--small;
+      height: 3rem;
     }
-    > div {
+    .homeworkForm__student__title,
+    .homeworkForm__date__title,
+    .homeworkForm__homework__title {
+      @extend .font--small-title;
       @extend .flex-row;
-      align-items: center;
-      font-size: 2rem;
-      input,
-      textarea {
-        @extend .subject--container__input;
+      @extend .flex-center;
+      min-width: 15rem;
+      max-width: 10vw;
+    }
+    .homeworkForm__student__names {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5px 3px;
+      @extend .flex-row;
+      @extend .flex-center;
+      .homework-form__student-name {
+        padding: 1rem 1.5rem;
+        border-radius: 3rem;
         font-size: b.$font-size--small;
-        height: 3rem;
-      }
-      .homeworkForm__student__title,
-      .homeworkForm__date__title,
-      .homeworkForm__homework__title {
-        @extend .font--small-title;
-        @extend .flex-row;
-        @extend .flex-center;
-        min-width: 20vw;
-      }
-      .homeworkForm__student__names {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 5px 3px;
-        @extend .flex-row;
-        @extend .flex-center;
-        .homework-form__student-name {
-          padding: 0.5rem 1rem;
-          font-size: 2rem;
-          border-radius: 3px;
-          font-size: b.$font-size--small;
-        }
-        .homework-form__student-name:hover {
+        font-size: 1.4rem;
+        font-family: "Pretendard-Light";
+        color: b.$sub-font-color--gray;
+        margin-right: 1rem;
+        filter: brightness(90%);
+        cursor: pointer;
+        position: relative;
+        input {
           cursor: pointer;
-          filter: brightness(80%);
-        }
-        .student-name--selected {
-          box-shadow: 0 0 0 3px b.$main-font-color inset;
-          @extend .font--small-title;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          left: 0;
         }
       }
-      .homeworkForm__homework__content {
-        height: 10rem;
+      .homework-form__student-name:hover,
+      .student-name--selected {
+        filter: brightness(110%);
+        font-family: "Pretendard-Medium";
+        transform: scale(1.2);
       }
     }
+    .homeworkForm__homework__content {
+      height: 10rem;
+    }
   }
-  .homeworkForm__saveBtn {
-    @extend .saveBtn;
-    @extend .font--small-title;
-  }
+}
+.homeworkForm__saveBtn {
+  @extend .saveBtn;
+  @extend .font--small-title;
 }

@@ -1,24 +1,20 @@
 @use "basic" as b;
-.Profiles {
-  height: 100%;
-}
-.profiles__main {
-  height: 100vh;
+.profiles__btns {
+  display: flex;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   .profiles__deleteBtn {
     @extend .font--small-title;
     @extend .flex-row;
     @extend .flex-center;
     cursor: pointer;
     padding: 1rem;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    border-radius: 3rem;
     font-size: b.$font-size--smallest;
   }
   .profiles__deleteBtn:hover {
-    background-color: b.$main-color;
-    border-radius: 3rem;
-    padding: 1rem;
+    @include b.to_deep_color;
   }
 }
 .profiles__students {
@@ -41,11 +37,10 @@
   .propfiles__profile__deleteBtn {
     @extend .flex-row;
     @extend .flex-center;
-    // background-color: #f2f2f2;
     font-size: 3rem;
     cursor: pointer;
   }
 }
 .profiles__profile:hover {
-  filter: brightness(90%);
+  transform: scale(1.02);
 }

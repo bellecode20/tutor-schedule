@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  BiX,
-  BiPlus,
-  BiMenu,
-  BiChevronLeft,
-  BiChevronRight,
-} from "react-icons/bi";
+  TbChevronUp,
+  TbChevronDown,
+  TbCalendarEvent,
+  TbPlus,
+} from "react-icons/tb";
 import HomeworksByDate from "./HomeworksByDate";
 import { useSelector, useDispatch } from "react-redux";
 import { changeCalendar } from "../features/calendarSlice";
@@ -16,7 +15,6 @@ import "../Styles/calendar.scss";
 const Calendar = ({ homework, setHomework }) => {
   const dispatch = useDispatch();
   const profilesKey = useSelector((state) => state.profiles.profiles);
-  const [displayMenu, setDisplayMenu] = useState(false);
   const [displayHomeworks, setDisplayHomeworks] = useState(false);
   let [today, setToday] = useState(new Date());
   let date = today.getDate();
@@ -25,6 +23,7 @@ const Calendar = ({ homework, setHomework }) => {
   const makeTwoDigit = (num) => {
     return num.toString().padStart(2, "0");
   };
+  let todayFullDate = `${year}-${makeTwoDigit(month)}-${makeTwoDigit(date)}`;
   const makeCalendar = () => {
     //// 요일을 번호로 나타낸다. 일요일부터 0번으로 시작한다.
     const daysToNumArray = [
@@ -164,9 +163,6 @@ const Calendar = ({ homework, setHomework }) => {
     setToday(new Date(year, month, date));
     closeHomeworks();
   };
-  const showMenu = () => {
-    setDisplayMenu(!displayMenu);
-  };
   const closeHomeworks = () => {
     setDisplayHomeworks(false);
   };
@@ -184,54 +180,42 @@ const Calendar = ({ homework, setHomework }) => {
   }, [profilesKey]);
   return (
     <div className="calendar">
-      <div onClick={showMenu} className="calendar__show-menu-btn">
-        <BiMenu className=""></BiMenu>
-      </div>
-      {displayMenu && (
-        <div className="calendar__menu">
-          <div onClick={showMenu} className="calendar__menu__close-btn nav-btn">
-            <BiX className=""></BiX>
-          </div>
-          <Link
-            to={`${process.env.REACT_APP_PATH}/buildprofile`}
-            className="link--remove-style"
-          >
-            <div className="calendar__menu__list">학생 추가</div>
+      <div className="calendar__nav">
+        <div className="calendar__links">
+          <TbCalendarEvent className="calendar__show-menu-btn"></TbCalendarEvent>
+          <Link to={`${process.env.REACT_APP_PATH}/profiles`} className="link">
+            <div>학생 관리</div>
           </Link>
-          <div className="menu__line"></div>
           <Link
-            to={`${process.env.REACT_APP_PATH}/profiles`}
-            className="link--remove-style"
+            to={`${process.env.REACT_APP_PATH}/homeworkview/${todayFullDate}`}
+            className="link"
           >
-            <div className="calendar__menu__list">학생 모아보기</div>
+            <div>숙제 내기</div>
           </Link>
-          <div className="menu__line"></div>
-          <Link
-            to={`${process.env.REACT_APP_PATH}/homeworkview/:${year}-${month}-${date}`}
-            className="link--remove-style"
-          >
-            <div className="calendar__menu__list">오늘 숙제 추가</div>
-          </Link>
-          <div className="menu__line"></div>
         </div>
-      )}
+      </div>
       <div className="calendar-only">
         <div className="calendarTop">
           <div className="calendarTop__this-month">
-            <button className="calendarTop__button--left" onClick={toPrevMonth}>
-              <BiChevronLeft className="nav-btn"></BiChevronLeft>
-            </button>
+            {/* <div>{year}년</div> */}
             <p>{month}월</p>
-            <button
-              className="calendarTop__button--right"
-              onClick={toNextMonth}
-            >
-              <BiChevronRight className="nav-btn"></BiChevronRight>
-            </button>
+            <div>
+              <button
+                className="calendarTop__button--left nav-btn"
+                onClick={toNextMonth}
+              >
+                <TbChevronUp className="nav-btn"></TbChevronUp>
+              </button>
+              <button
+                className="calendarTop__button--right nav-btn"
+                onClick={toPrevMonth}
+              >
+                <TbChevronDown className="nav-btn"></TbChevronDown>
+              </button>
+            </div>
           </div>
         </div>
         <div className="calendarBttm">
-          {year} - {month} - {date}
           <div className="days">
             <div className="sunday">일</div>
             <div className="monday">월</div>
@@ -249,14 +233,16 @@ const Calendar = ({ homework, setHomework }) => {
                 data-full-date={oneDay.fullDate}
                 onClick={changeSelectedStates}
               >
-                {oneDay.date}
-                <div className="dates__studentColors">
-                  {oneDay.students.map((obj, idx) => (
-                    <div
-                      className={`${obj.color} studentInCal`}
-                      key={idx}
-                    ></div>
-                  ))}
+                <div className="dates__date__date">
+                  {oneDay.date}
+                  <div className="dates__studentColors">
+                    {oneDay.students.map((obj, idx) => (
+                      <div
+                        className={`${obj.color} studentInCal`}
+                        key={idx}
+                      ></div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
@@ -271,13 +257,11 @@ const Calendar = ({ homework, setHomework }) => {
         ></HomeworksByDate>
       )}
       <Link
-        to={`${process.env.REACT_APP_PATH}/homeworkview/${year}-${makeTwoDigit(
-          month
-        )}-${makeTwoDigit(date)}`}
+        to={`${process.env.REACT_APP_PATH}/homeworkview/${todayFullDate}`}
         className="link--remove-style"
       >
         <div className="calendar__add-hwmk-btn">
-          <BiPlus className="calendar__add-hwmk-btn__icon"></BiPlus>
+          <TbPlus className="calendar__add-hwmk-btn__icon"></TbPlus>
         </div>
       </Link>
     </div>

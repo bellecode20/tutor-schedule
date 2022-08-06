@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { BiHome, BiLeftArrowAlt } from "react-icons/bi";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleShowing, changeId } from "../features/modalSlice.js";
 import { setProfilesKey, setProfilesLS } from "../features/profilesSlice";
+import NavBar from "./NavBar.js";
+import Layout from "./Layout.js";
 import "../Styles/BuildHomework.scss";
 const BuildHomework = ({ homework, setHomework }) => {
   let profilesKey = useSelector((state) => state.profiles.profiles);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { clickedDate } = useParams();
   const [newHomework, setNewHomework] = useState({
     homeworkStudent: "",
@@ -102,17 +102,7 @@ const BuildHomework = ({ homework, setHomework }) => {
   };
 
   return (
-    <div className="build-homework">
-      <div className="nav-btn--container">
-        <BiLeftArrowAlt
-          className="nav-btn"
-          onClick={() => navigate(-1)}
-        ></BiLeftArrowAlt>
-        <BiHome
-          className="nav-btn"
-          onClick={() => navigate(process.env.REACT_APP_PATH)}
-        ></BiHome>
-      </div>
+    <Layout>
       <div className="page-title">숙제 추가</div>
       <div className="titleLine"></div>
       <form onSubmit={homeworkSubmit}>
@@ -122,7 +112,7 @@ const BuildHomework = ({ homework, setHomework }) => {
             <div className="homeworkForm__student__names">
               {profilesKey &&
                 profilesKey.map((info, i) => (
-                  <div
+                  <label
                     className={
                       newHomework.homeworkStudent == info.name ||
                       profilesKey.length == 1
@@ -131,18 +121,15 @@ const BuildHomework = ({ homework, setHomework }) => {
                     }
                     key={i}
                   >
-                    <label>
-                      <input
-                        type="radio"
-                        name="homeworkStudent"
-                        onChange={changeNewHomework}
-                        // onClick={changeNewHomework}
-                        value={info.name}
-                        checked={i == 0 && profilesKey.length == 1 && true}
-                      />
-                      {info.name}
-                    </label>
-                  </div>
+                    <input
+                      type="radio"
+                      name="homeworkStudent"
+                      onChange={changeNewHomework}
+                      value={info.name}
+                      checked={i == 0 && profilesKey.length == 1 && true}
+                    />
+                    {info.name}
+                  </label>
                 ))}
             </div>
           </div>
@@ -171,7 +158,8 @@ const BuildHomework = ({ homework, setHomework }) => {
           저장
         </button>
       </form>
-    </div>
+    </Layout>
   );
 };
+
 export default BuildHomework;

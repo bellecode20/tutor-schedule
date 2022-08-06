@@ -8,32 +8,45 @@
   flex-basis: 0;
   word-break: break-all;
   padding: 0 15vw;
+  display: flex;
+  flex-direction: column;
   @include for-tablet-landscape-up {
     padding: 0 20vw;
+  }
+  .homework-lists__top {
+    @extend .flex-row;
+    @extend .flex-center;
+    padding: 1rem;
   }
   .calendar__homework-lists__close-btn {
     @extend .flex-row;
     @extend .flex-center;
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
     cursor: pointer;
     border-radius: 50%;
-  }
-  .calendar__homework-lists__close-btn:hover {
-    background-color: white;
+    font-size: 2.2rem;
   }
   .calendar__homework-lists__date {
     @extend .font--small-title;
     @extend .flex-row;
     @extend .flex-center;
     text-align: center;
-    height: 15%;
+    margin-right: auto;
+    margin-left: auto;
   }
   .calendar__homework-lists__all-students {
     position: relative;
     overflow: auto;
-    height: 70%;
+    height: 100%;
+    margin-bottom: auto;
+    .text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: "Pretendard-Bold";
+      color: #dbdbdb;
+      font-size: 3rem;
+    }
     @include for-tablet-portrait-up {
       display: flex;
       flex-wrap: wrap;
@@ -58,10 +71,11 @@
         .calendar__homework-list__deleteBtn {
           padding: 5px;
           border-radius: 50%;
+          cursor: pointer;
+          color: #00000052;
         }
         .calendar__homework-list__deleteBtn:hover {
-          background-color: white;
-          cursor: pointer;
+          color: black;
         }
       }
       .calendar__homework-list__content {
@@ -85,17 +99,25 @@
   .calendar__homework-lists__addHmwk {
     @extend .flex-row;
     @extend .flex-center;
-    height: 15%;
     border: 0;
+    .homework-lists__addHmwk-btn {
+      margin: 2rem;
+      border-radius: 3rem;
+      padding: 1rem 1.5rem;
+      background-color: b.$main-color--deep;
+      color: white;
+      font-size: 1.6rem;
+      font-family: "Pretendard-Medium";
+    }
+    .homework-lists__addHmwk-btn:hover {
+      filter: brightness(110%);
+    }
     button {
       @extend .flex-row;
       @extend .flex-center;
-      background-color: b.$main-color--deep;
       background-color: white;
       font-size: b.$font-size--smallest;
       border: 0;
-      border-radius: 1rem;
-      padding: 1rem 2rem;
     }
     button:hover {
       background-color: b.$main-color--deep;

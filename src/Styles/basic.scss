@@ -54,16 +54,22 @@
   font-weight: 900;
   font-style: normal;
 }
+@mixin to_deep_color {
+  color: $main-color--deep;
+}
+@mixin scale_up {
+  transform: scale(1.1);
+}
 
 //color
 $coral: #e97b6e;
-$gray: #f2f2f2;
+$gray: #f3f3f6;
 $deep-gray: #d2d2d7;
 $main-blue--light: #71b3fc;
 $main-blue: #0071e3;
-$main-color: #edf2ff;
-$main-color--light: #f5f8ff;
-$main-color--deep: #d3e0ff;
+$main-color: #a0ffab;
+$main-color--light: #71b3fc;
+$main-color--deep: #0071e3;
 $main-font-color: #1e1e21;
 $sub-font-color--gray: rgb(59, 59, 59);
 
@@ -91,15 +97,13 @@ $page-content-ratio--with-btn: 65vh;
 .nav-btn {
   @extend .flex-row;
   @extend .flex-center;
-  padding: 0.5rem;
+  padding: 0.8rem;
   cursor: pointer;
-  font-size: 2rem;
   border-radius: 50%;
 }
 .nav-btn:hover {
-  background-color: $main-color;
   border-radius: 50%;
-  padding: 0.5rem;
+  @include to_deep_color;
 }
 //@Flex
 .flex-row {
@@ -155,19 +159,24 @@ $page-content-ratio--with-btn: 65vh;
   background-color: $gray;
 }
 .contentLine {
-  width: 90%;
+  width: 100%;
   height: 1px;
   background-color: $gray;
 }
 .saveBtn {
-  position: fixed;
   cursor: pointer;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 10vh;
   border: none;
-  background-color: $main-color;
+  background-color: $gray;
+  color: $main-color--deep;
+  font-family: "Pretendard-Light";
+}
+.saveBtn:hover {
+  filter: brightness(95%);
 }
 .pinkCoral {
   background-color: #e97b6e;
