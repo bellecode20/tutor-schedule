@@ -58,16 +58,6 @@ const DetailedProfile = () => {
                   </div>
                 </div>
               </div>
-              <div className="studentInfo__wage__result">
-                <div className="studentInfo__wage__p">
-                  <span className="studentInfo__highlight studentInfo__padding">
-                    전체
-                  </span>
-                  <span className="studentInfo__padding">
-                    {detailedStudent.totalNum}회
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
           <div className="contentLine"></div>

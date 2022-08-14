@@ -12,8 +12,10 @@ import { changeCalendar } from "../features/calendarSlice";
 import { changeDate } from "../features/clickedDateSlice";
 import "../Styles/basic.scss";
 import "../Styles/calendar.scss";
+import { toggleShowing } from "../features/modalSlice";
 const Calendar = ({ homework, setHomework }) => {
   const dispatch = useDispatch();
+  const isShown = useSelector((state) => state.modal.isShown);
   const profilesKey = useSelector((state) => state.profiles.profiles);
   const [displayHomeworks, setDisplayHomeworks] = useState(false);
   let [today, setToday] = useState(new Date());
@@ -173,6 +175,7 @@ const Calendar = ({ homework, setHomework }) => {
   };
   useEffect(() => {
     dispatch(changeCalendar(makeCalendar()));
+    if (isShown) dispatch(toggleShowing()); // 모달창 안닫고 뒤로가기를 눌러서 온 경우엔 모달창을 닫는다.
   }, [today]);
   useEffect(() => {
     // extraLesson을 삭제하면 (학생 프로필을 수정하면) 캘린더 객체도 업뎃해야 한다.

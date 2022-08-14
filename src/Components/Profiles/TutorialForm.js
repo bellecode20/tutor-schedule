@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import AOS from "aos";
+import { TbArrowRight } from "react-icons/tb";
 import "aos/dist/aos.css";
 import tutorial from "../../Styles/tutorial.module.scss";
 const TutorialForm = ({
@@ -14,16 +15,15 @@ const TutorialForm = ({
     AOS.init();
     AOS.refresh();
   }, []);
-  useEffect(() => {
-    console.log(allValues);
-  }, [allValues]);
   const handleEnter = (e) => {
-    console.log(e.currentTarget);
     if (e.type == "click") {
       //시작하기 버튼 눌렀을 때 다음 슬라이드로 넘어간다.
-      const form = e.target.form;
-      const index = [...form].indexOf(e.target);
-      form.elements[index + 1].focus();
+      const form = e.currentTarget.form;
+      const index = [...form].indexOf(e.currentTarget);
+      if (form.elements[index + 1].name == "firstDate") return; // date input에 포커싱될 때는 스크롤이 갑자기 내려간다.
+      form.elements[index + 1].focus({
+        preventScroll: true,
+      });
       e.preventDefault();
     } else if (e.key.toLowerCase() === "enter") {
       //인풋창 입력한 뒤 엔터치면 다음 슬라이드로 넘어간다.
@@ -33,19 +33,25 @@ const TutorialForm = ({
         changeHandler(e);
         return;
       }
-      const form = e.target.form;
+      const form = e.currentTarget.form;
       const index = [...form].indexOf(e.target);
-      form.elements[index + 1].focus();
+      form.elements[index + 1].focus({
+        preventScroll: true,
+      });
       e.preventDefault();
     } else if (e.keyCode == "37") {
-      const form = e.target.form;
+      const form = e.currentTarget.form;
       const index = [...form].indexOf(e.target);
-      form.elements[index - 1].focus();
+      form.elements[index - 1].focus({
+        preventScroll: true,
+      });
       e.preventDefault();
     } else if (e.keyCode == "39") {
-      const form = e.target.form;
+      const form = e.currentTarget.form;
       const index = [...form].indexOf(e.target);
-      form.elements[index + 1].focus();
+      form.elements[index + 1].focus({
+        preventScroll: true,
+      });
       e.preventDefault();
     }
   };
@@ -54,6 +60,30 @@ const TutorialForm = ({
     startBtn.current.focus();
   }, []);
   const duration = "1200";
+  const NextSectionBtn = ({ isStartBtn, index }) => {
+    let content;
+    if (isStartBtn) content = "시작하기";
+    else content = <TbArrowRight></TbArrowRight>;
+    return (
+      <button
+        className={isStartBtn ? null : tutorial.nextSectionBtn}
+        type="button"
+        ref={isStartBtn ? startBtn : null}
+        onClick={(e) => goToNextSection(e, index)}
+        onKeyDown={(e) => goToNextSection(e, index)}
+      >
+        {content}
+      </button>
+    );
+  };
+  const goToNextSection = (e, index) => {
+    const scrollPixel = window.innerHeight * index;
+    window.scrollTo({
+      top: scrollPixel,
+      behavior: "smooth",
+    });
+    handleEnter(e);
+  };
   return (
     <div className={tutorial.wrapper}>
       <form onSubmit={profileSubmit} className={tutorial.wrapper__form}>
@@ -66,14 +96,7 @@ const TutorialForm = ({
             <div className={tutorial.textContainer}>
               <p className={tutorial.question}>처음이신가요?</p>
               <p className={tutorial.question}>학생 프로필을 작성해주세요.</p>
-              <button
-                type="button"
-                ref={startBtn}
-                onClick={handleEnter}
-                onKeyDown={handleEnter}
-              >
-                시작하기
-              </button>
+              <NextSectionBtn isStartBtn={true} index={1}></NextSectionBtn>
             </div>
           </div>
         </div>
@@ -95,6 +118,7 @@ const TutorialForm = ({
                   onKeyDown={handleEnter}
                 ></input>
               </div>
+              <NextSectionBtn isStartBtn={false} index={2}></NextSectionBtn>
             </div>
           </div>
         </div>
@@ -149,21 +173,8 @@ const TutorialForm = ({
                     <span>회</span>
                   </div>
                 </div>
-                <div className={tutorial.list}>
-                  <span className={tutorial.title}>전체</span>
-                  <div className={tutorial.content}>
-                    <input
-                      type="number"
-                      name="totalNum"
-                      min="0"
-                      placeholder="8"
-                      onChange={changeHandler}
-                      onKeyDown={handleEnter}
-                    ></input>
-                    <span>회</span>
-                  </div>
-                </div>
               </div>
+              <NextSectionBtn isStartBtn={false} index={3}></NextSectionBtn>
             </div>
           </div>
         </div>
@@ -184,6 +195,7 @@ const TutorialForm = ({
                   onKeyDown={handleEnter}
                 ></input>
               </div>
+              <NextSectionBtn isStartBtn={false} index={4}></NextSectionBtn>
             </div>
           </div>
         </div>
@@ -220,6 +232,7 @@ const TutorialForm = ({
                   </div>
                 ))}
               </div>
+              <NextSectionBtn isStartBtn={false} index={5}></NextSectionBtn>
             </div>
           </div>
         </div>
@@ -260,6 +273,7 @@ const TutorialForm = ({
                   </div>
                 ))}
               </div>
+              <NextSectionBtn isStartBtn={false} index={6}></NextSectionBtn>
             </div>
           </div>
         </div>

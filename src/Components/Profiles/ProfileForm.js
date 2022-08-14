@@ -67,20 +67,6 @@ const ProfileForm = ({
                     </div>
                   </div>
                 </div>
-                <div className="studentInfo__wage__result">
-                  <div className="studentInfo__wage__p">
-                    <span className="studentInfo__highlight">전체</span>
-                    <span className="studentInfo__margin">
-                      <input
-                        type="number"
-                        name="totalNum"
-                        placeholder="8"
-                        onChange={changeHandler}
-                      ></input>
-                      회
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="contentLine"></div>

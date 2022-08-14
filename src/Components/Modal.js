@@ -62,10 +62,6 @@ const Modal = () => {
   const mainText = thisModal.mainText;
   const subText = thisModal.subText;
   const mode = thisModal.mode;
-
-  document.body.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") console.log(e.target);
-  });
   return ReactDOM.createPortal(
     <div className={modal.overlay}>
       <div

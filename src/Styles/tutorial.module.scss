@@ -14,7 +14,6 @@
       @extend .flex-center;
       @extend .flex-column;
       height: 100%;
-      max-width: 60%;
       .question {
         align-self: flex-start;
         font-size: 5rem;
@@ -40,6 +39,14 @@
         background-color: $main-blue;
         color: white;
         border: none;
+      }
+      .nextSectionBtn {
+        position: absolute;
+        bottom: 10%;
+        right: 0;
+        padding: 0;
+        width: 5rem;
+        height: 5rem;
       }
       .textContainer {
         @extend .flex-center;

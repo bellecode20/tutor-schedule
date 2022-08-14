@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleShowing, changeId } from "../features/modalSlice.js";
 import { setProfilesKey, setProfilesLS } from "../features/profilesSlice";
-import NavBar from "./NavBar.js";
 import Layout from "./Layout.js";
 import "../Styles/BuildHomework.scss";
 const BuildHomework = ({ homework, setHomework }) => {

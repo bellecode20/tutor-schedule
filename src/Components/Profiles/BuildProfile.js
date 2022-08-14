@@ -24,7 +24,6 @@ const BuildProfile = () => {
     wage: "",
     onWeek: "",
     hour: "",
-    totalNum: "",
     firstDate: `${new Date().toISOString().substring(0, 10)}`,
     days: "",
     color: "",
@@ -49,8 +48,7 @@ const BuildProfile = () => {
     } else if (
       e.target.name == "hour" ||
       e.target.name == "wage" ||
-      e.target.name == "onWeek" ||
-      e.target.name == "totalNum"
+      e.target.name == "onWeek"
     ) {
       setAllValues({
         ...allValues,
