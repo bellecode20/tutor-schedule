@@ -200,7 +200,6 @@ const Calendar = ({ homework, setHomework }) => {
       <div className="calendar-only">
         <div className="calendarTop">
           <div className="calendarTop__this-month">
-            {/* <div>{year}년</div> */}
             <p>{month}월</p>
             <div>
               <button

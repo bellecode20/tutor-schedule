@@ -47,15 +47,18 @@
     .calendarTop__this-month {
       @extend .flex-row;
       @extend .flex-center;
-      font-size: 7rem;
+      font-size: 5rem;
+      @include for-tablet-landscape-up {
+        font-size: 7rem;
+      }
     }
     button {
       @extend .flex-row;
       @extend .flex-center;
-      font-size: 3rem;
+      font-size: 2rem;
       background-color: transparent;
       border: none;
-      padding: 0 2rem;
+      padding: 0;
       cursor: pointer;
     }
   }
