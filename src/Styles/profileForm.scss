@@ -147,16 +147,16 @@
   margin-right: 5px;
   border-radius: 1rem;
   cursor: pointer;
-  opacity: 60%;
+  opacity: 0.6;
 }
 label:hover {
   .colorLabelDiv {
-    opacity: 100%;
+    opacity: 1;
     transform: scale(1.2);
   }
 }
 .colorLabelDarker {
-  opacity: 100%;
+  opacity: 1;
   transform: scale(1.2);
   border: 1px solid #dbdbdb;
 }
